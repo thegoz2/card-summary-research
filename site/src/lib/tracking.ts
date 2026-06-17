@@ -8,9 +8,11 @@ export interface LogRow {
 }
 
 export function parseLogTable(body: string): LogRow[] {
-  const idx = body.indexOf('Log สรุป');
-  if (idx === -1) return [];
-  const lines = body.slice(idx).split('\n');
+  // Find the actual heading "## … Log สรุป", not the first mention in the how-to text.
+  const heading = body.match(/^#{1,6}.*Log สรุป.*$/m);
+  if (!heading) return [];
+  const idx = body.indexOf(heading[0]);
+  const lines = body.slice(idx).split(/\r?\n/);
 
   const tableLines: string[] = [];
   let inTable = false;
