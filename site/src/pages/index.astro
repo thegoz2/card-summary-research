@@ -1,0 +1,171 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import {
+  noteTitle,
+  noteSlug,
+  noteTags,
+  categoryOf,
+  excerpt,
+  allCategories,
+} from '../lib/notes';
+
+const notes = await getCollection('notes');
+
+const items = notes
+  .map((n) => {
+    const cat = categoryOf(n);
+    return {
+      slug: noteSlug(n),
+      title: noteTitle(n),
+      tags: noteTags(n),
+      excerpt: excerpt(n.body ?? ''),
+      cat: cat.key,
+      date: n.data.date ? new Date(n.data.date).toISOString().slice(0, 10) : '',
+    };
+  })
+  .sort((a, b) => a.title.localeCompare(b.title, 'th'));
+
+const cats = allCategories();
+const grouped = cats
+  .map((c) => ({ ...c, notes: items.filter((i) => i.cat === c.key) }))
+  .filter((c) => c.notes.length > 0);
+
+const lastUpdated = notes
+  .map((n) => (n.data.updated || n.data.date) as Date | undefined)
+  .filter(Boolean)
+  .map((d) => new Date(d as Date).getTime())
+  .sort((a, b) => b - a)[0];
+const lastUpdatedStr = lastUpdated ? new Date(lastUpdated).toISOString().slice(0, 10) : '—';
+---
+
+<Base>
+  <main class="mx-auto max-w-6xl px-4 pb-16">
+    <!-- Hero -->
+    <section class="grid gap-4 py-8 md:grid-cols-3">
+      <div class="md:col-span-2 flex flex-col justify-center">
+        <h1 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
+          One Piece TCG — งานวิจัยทำกำไร
+        </h1>
+        <p class="mt-3 max-w-2xl text-slate-600">
+          รวมงานวิจัย {notes.length} โน้ตจาก Obsidian — กลยุทธ์ ต้นทุน ราคา ตลาด และสัญญาณเตือนฟองสบู่
+          อ่านง่ายในที่เดียว พร้อม Dashboard วิเคราะห์ตัวเลข
+        </p>
+        <div class="mt-5 flex flex-wrap gap-3">
+          <a
+            href="/dashboard/"
+            class="rounded-xl bg-[var(--accent)] px-5 py-2.5 font-semibold text-white shadow-sm transition hover:bg-[var(--brand-700,#b91c1c)]"
+            >📊 เปิด Dashboard วิเคราะห์</a>
+          <a
+            href="/notes/one-piece-tcg-ทำกำไร-ภาพรวม/"
+            class="rounded-xl border border-[var(--border)] bg-white px-5 py-2.5 font-semibold text-slate-700 transition hover:bg-slate-50"
+            >📖 อ่านโน้ตภาพรวม</a>
+        </div>
+      </div>
+      <div class="card flex flex-col justify-center gap-3 p-5">
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-slate-500">จำนวนโน้ต</span>
+          <span class="text-2xl font-extrabold">{notes.length}</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-slate-500">หมวดหมู่</span>
+          <span class="text-2xl font-extrabold">{grouped.length}</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-slate-500">อัปเดตล่าสุด</span>
+          <span class="font-semibold">{lastUpdatedStr}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Controls -->
+    <section class="sticky top-14 z-20 -mx-4 mb-6 border-y border-[var(--border)] bg-[var(--bg)]/90 px-4 py-3 backdrop-blur">
+      <input
+        id="search"
+        type="search"
+        placeholder="🔍 ค้นหาโน้ต… (พิมพ์ชื่อ หัวข้อ หรือแท็ก)"
+        class="w-full rounded-xl border border-[var(--border)] bg-white px-4 py-2.5 text-sm outline-none focus:border-[var(--accent)]"
+        autocomplete="off"
+      />
+      <div id="cat-filter" class="mt-3 flex flex-wrap gap-2">
+        <button class="chip chip-active" data-cat="all">ทั้งหมด</button>
+        {grouped.map((c) => (
+          <button class="chip" data-cat={c.key}>{c.icon} {c.label}</button>
+        ))}
+      </div>
+    </section>
+
+    <!-- Note groups -->
+    <div id="groups">
+      {grouped.map((c) => (
+        <section class="note-group mb-8" data-cat={c.key}>
+          <h2 class="mb-3 flex items-center gap-2 text-lg font-bold">
+            <span>{c.icon}</span>{c.label}
+            <span class="text-sm font-normal text-slate-400">({c.notes.length})</span>
+          </h2>
+          <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {c.notes.map((n) => (
+              <a
+                href={`/notes/${n.slug}/`}
+                class="note-card card group flex flex-col p-4 transition hover:border-[var(--accent)] hover:shadow-sm"
+                data-title={n.title.toLowerCase()}
+                data-tags={n.tags.join(' ').toLowerCase()}
+                data-text={n.excerpt.toLowerCase()}
+              >
+                <h3 class="font-semibold leading-snug text-slate-800 group-hover:text-[var(--accent)]">
+                  {n.title}
+                </h3>
+                {n.excerpt && (
+                  <p class="mt-1.5 line-clamp-3 text-sm text-slate-500">{n.excerpt}</p>
+                )}
+                {n.tags.length > 0 && (
+                  <div class="mt-3 flex flex-wrap gap-1">
+                    {n.tags.slice(0, 4).map((t) => <span class="chip">{t}</span>)}
+                  </div>
+                )}
+              </a>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <p id="no-results" class="hidden py-10 text-center text-slate-400">ไม่พบโน้ตที่ตรงกับคำค้น</p>
+  </main>
+
+  <script is:inline>
+    const search = document.getElementById('search');
+    const groups = Array.from(document.querySelectorAll('.note-group'));
+    const chips = Array.from(document.querySelectorAll('#cat-filter button'));
+    const noResults = document.getElementById('no-results');
+    let activeCat = 'all';
+
+    function apply() {
+      const q = (search.value || '').trim().toLowerCase();
+      let visibleTotal = 0;
+      for (const group of groups) {
+        const cat = group.dataset.cat;
+        const catOk = activeCat === 'all' || activeCat === cat;
+        let groupVisible = 0;
+        for (const card of group.querySelectorAll('.note-card')) {
+          const hay = card.dataset.title + ' ' + card.dataset.tags + ' ' + card.dataset.text;
+          const match = catOk && (!q || hay.includes(q));
+          card.style.display = match ? '' : 'none';
+          if (match) groupVisible++;
+        }
+        group.style.display = groupVisible > 0 ? '' : 'none';
+        visibleTotal += groupVisible;
+      }
+      noResults.classList.toggle('hidden', visibleTotal > 0);
+    }
+
+    search.addEventListener('input', apply);
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        activeCat = chip.dataset.cat;
+        chips.forEach((c) => c.classList.toggle('chip-active', c === chip));
+        apply();
+      });
+    });
+  </script>
+</Base>

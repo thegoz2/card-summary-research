@@ -1,0 +1,15 @@
+# dependencies / build
+site/node_modules/
+site/dist/
+site/.astro/
+node_modules/
+
+# logs / os
+*.log
+.DS_Store
+Thumbs.db
+
+# obsidian local workspace state (keep config, drop per-machine UI state)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache

@@ -1,0 +1,118 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import {
+  noteTitle,
+  noteSlug,
+  noteTags,
+  categoryOf,
+  backlinks,
+} from '../../lib/notes';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes');
+  return notes.map((note) => ({ params: { slug: noteSlug(note) }, props: { note } }));
+}
+
+const { note } = Astro.props;
+const all = await getCollection('notes');
+const { Content, headings } = await render(note);
+
+const title = noteTitle(note);
+const cat = categoryOf(note);
+const tags = noteTags(note);
+const sources = (note.data.sources as string[] | undefined) ?? [];
+const links = backlinks(note, all);
+const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const dateStr = note.data.date ? new Date(note.data.date).toISOString().slice(0, 10) : '';
+const updatedStr = note.data.updated
+  ? new Date(note.data.updated).toISOString().slice(0, 10)
+  : '';
+
+function hostOf(url: string) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return url;
+  }
+}
+---
+
+<Base title={title}>
+  <main class="mx-auto max-w-6xl px-4 py-6">
+    <a href="/" class="text-sm text-slate-500 hover:text-[var(--accent)]">← หน้าแรก</a>
+
+    <div class="mt-3 grid gap-8 lg:grid-cols-[minmax(0,1fr)_270px]">
+      <!-- Article -->
+      <article>
+        <div class="mb-4 flex flex-wrap items-center gap-2 text-sm text-slate-500">
+          <span class="chip">{cat.icon} {cat.label}</span>
+          {dateStr && <span>📅 {dateStr}</span>}
+          {updatedStr && updatedStr !== dateStr && <span>· อัปเดต {updatedStr}</span>}
+        </div>
+        <div class="prose">
+          <Content />
+        </div>
+      </article>
+
+      <!-- Aside -->
+      <aside class="lg:sticky lg:top-20 lg:h-fit space-y-6 text-sm">
+        {toc.length > 0 && (
+          <div class="card p-4">
+            <div class="mb-2 font-bold text-slate-700">สารบัญ</div>
+            <nav class="space-y-1">
+              {toc.map((h) => (
+                <a
+                  href={`#${h.slug}`}
+                  class:list={[
+                    'block truncate text-slate-500 hover:text-[var(--accent)]',
+                    h.depth === 3 ? 'pl-3 text-[0.8rem]' : 'font-medium',
+                  ]}
+                  title={h.text}>{h.text}</a>
+              ))}
+            </nav>
+          </div>
+        )}
+
+        {tags.length > 0 && (
+          <div class="card p-4">
+            <div class="mb-2 font-bold text-slate-700">แท็ก</div>
+            <div class="flex flex-wrap gap-1">
+              {tags.map((t) => <span class="chip">{t}</span>)}
+            </div>
+          </div>
+        )}
+
+        {links.length > 0 && (
+          <div class="card p-4">
+            <div class="mb-2 font-bold text-slate-700">โน้ตที่ลิงก์มาที่นี่ ({links.length})</div>
+            <ul class="space-y-1.5">
+              {links.map((l) => (
+                <li>
+                  <a href={`/notes/${noteSlug(l)}/`} class="text-blue-600 hover:underline">
+                    {noteTitle(l)}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {sources.length > 0 && (
+          <div class="card p-4">
+            <div class="mb-2 font-bold text-slate-700">แหล่งอ้างอิง ({sources.length})</div>
+            <ul class="space-y-1.5">
+              {sources.map((s) => (
+                <li class="truncate">
+                  <a href={s} target="_blank" rel="noopener" class="text-slate-500 hover:text-[var(--accent)]" title={s}>
+                    🔗 {hostOf(s)}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </aside>
+    </div>
+  </main>
+</Base>

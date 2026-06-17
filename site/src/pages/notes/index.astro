@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { noteTitle, noteSlug, categoryOf, allCategories } from '../../lib/notes';
+
+const notes = await getCollection('notes');
+const items = notes
+  .map((n) => ({ slug: noteSlug(n), title: noteTitle(n), cat: categoryOf(n).key }))
+  .sort((a, b) => a.title.localeCompare(b.title, 'th'));
+
+const grouped = allCategories()
+  .map((c) => ({ ...c, notes: items.filter((i) => i.cat === c.key) }))
+  .filter((c) => c.notes.length > 0);
+---
+
+<Base title="โน้ตทั้งหมด">
+  <main class="mx-auto max-w-4xl px-4 py-8">
+    <h1 class="text-2xl font-extrabold">โน้ตทั้งหมด ({notes.length})</h1>
+    <p class="mt-1 text-slate-500">สารบัญรวมทุกโน้ต จัดตามหมวด</p>
+
+    <div class="mt-6 space-y-7">
+      {grouped.map((c) => (
+        <section>
+          <h2 class="mb-2 flex items-center gap-2 text-lg font-bold">
+            <span>{c.icon}</span>{c.label}
+            <span class="text-sm font-normal text-slate-400">({c.notes.length})</span>
+          </h2>
+          <ul class="grid gap-1.5 sm:grid-cols-2">
+            {c.notes.map((n) => (
+              <li>
+                <a
+                  href={`/notes/${n.slug}/`}
+                  class="block rounded-lg px-3 py-2 text-slate-700 transition hover:bg-white hover:text-[var(--accent)]">
+                  {n.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  </main>
+</Base>

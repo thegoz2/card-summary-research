@@ -1,0 +1,37 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title = 'OP TCG Research', description = 'งานวิจัย One Piece TCG — อ่านง่าย วิเคราะห์ได้' } =
+  Astro.props;
+const fullTitle = title === 'OP TCG Research' ? title : `${title} · OP TCG Research`;
+---
+
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🃏</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Noto+Sans+Thai:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <Header />
+    <slot />
+    <footer class="mx-auto max-w-6xl px-4 py-10 text-center text-xs text-slate-400">
+      สร้างจาก Obsidian vault · ข้อมูลเป็น snapshot ปี 2025–2026 ตรวจสอบล่าสุดก่อนตัดสินใจเสมอ
+    </footer>
+  </body>
+</html>
