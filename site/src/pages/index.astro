@@ -9,6 +9,7 @@ import {
   excerpt,
   allCategories,
 } from '../lib/notes';
+import { url } from '../lib/url';
 
 const notes = await getCollection('notes');
 
@@ -53,11 +54,11 @@ const lastUpdatedStr = lastUpdated ? new Date(lastUpdated).toISOString().slice(0
         </p>
         <div class="mt-5 flex flex-wrap gap-3">
           <a
-            href="/dashboard/"
+            href={url('/dashboard/')}
             class="rounded-xl bg-[var(--accent)] px-5 py-2.5 font-semibold text-white shadow-sm transition hover:bg-[var(--brand-700,#b91c1c)]"
             >📊 เปิด Dashboard วิเคราะห์</a>
           <a
-            href="/notes/one-piece-tcg-ทำกำไร-ภาพรวม/"
+            href={url('/notes/one-piece-tcg-ทำกำไร-ภาพรวม/')}
             class="rounded-xl border border-[var(--border)] bg-white px-5 py-2.5 font-semibold text-slate-700 transition hover:bg-slate-50"
             >📖 อ่านโน้ตภาพรวม</a>
         </div>
@@ -106,7 +107,7 @@ const lastUpdatedStr = lastUpdated ? new Date(lastUpdated).toISOString().slice(0
           <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {c.notes.map((n) => (
               <a
-                href={`/notes/${n.slug}/`}
+                href={url(`/notes/${n.slug}/`)}
                 class="note-card card group flex flex-col p-4 transition hover:border-[var(--accent)] hover:shadow-sm"
                 data-title={n.title.toLowerCase()}
                 data-tags={n.tags.join(' ').toLowerCase()}

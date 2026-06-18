@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import { rawName, noteSlug } from '../lib/notes';
+import { url } from '../lib/url';
 import { parseLogTable } from '../lib/tracking';
 import * as M from '../data/market';
 
@@ -10,7 +11,7 @@ const trackingNote = all.find((n) => rawName(n).includes('Tracking Sheet'));
 const series = trackingNote ? parseLogTable(trackingNote.body ?? '') : [];
 const noteLink = (titlePart: string) => {
   const n = all.find((x) => rawName(x).includes(titlePart));
-  return n ? `/notes/${noteSlug(n)}/` : '/notes/';
+  return url(n ? `/notes/${noteSlug(n)}/` : '/notes/');
 };
 const fmt = (n: number) => n.toLocaleString('en-US');
 

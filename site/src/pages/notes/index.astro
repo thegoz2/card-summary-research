@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { noteTitle, noteSlug, categoryOf, allCategories } from '../../lib/notes';
+import { url } from '../../lib/url';
 
 const notes = await getCollection('notes');
 const items = notes
@@ -29,7 +30,7 @@ const grouped = allCategories()
             {c.notes.map((n) => (
               <li>
                 <a
-                  href={`/notes/${n.slug}/`}
+                  href={url(`/notes/${n.slug}/`)}
                   class="block rounded-lg px-3 py-2 text-slate-700 transition hover:bg-white hover:text-[var(--accent)]">
                   {n.title}
                 </a>

@@ -2,7 +2,8 @@ import { slugify } from './slug.mjs';
 
 // Turns Obsidian [[Target]] and [[Target|Alias]] into real links.
 // Targets that don't match a known note get a class so we can grey them out.
-export default function remarkWikilink({ knownSlugs } = {}) {
+export default function remarkWikilink({ knownSlugs, base = '/' } = {}) {
+  const prefix = base.endsWith('/') ? base.slice(0, -1) : base; // '' or '/card-summary-research'
   return (tree) => transform(tree);
 
   function transform(node) {
@@ -36,7 +37,7 @@ export default function remarkWikilink({ knownSlugs } = {}) {
       const exists = !knownSlugs || knownSlugs.has(slug);
       nodes.push({
         type: 'link',
-        url: '/notes/' + slug + '/',
+        url: prefix + '/notes/' + slug + '/',
         data: {
           hProperties: {
             className: exists ? ['wikilink'] : ['wikilink', 'wikilink-missing'],

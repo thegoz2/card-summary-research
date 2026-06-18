@@ -17,12 +17,16 @@ const knownSlugs = new Set(
     .map((f) => slugify(f.replace(/\.md$/, '')))
 );
 
+// base = '/' locally, '/card-summary-research' on GitHub Pages (set BASE_PATH in CI)
+const base = process.env.BASE_PATH || '/';
+
 export default defineConfig({
-  site: 'https://op-tcg-research.local',
+  site: process.env.SITE_URL || 'https://thegoz2.github.io',
+  base,
   vite: { plugins: [tailwind()] },
   markdown: {
     gfm: true,
-    remarkPlugins: [remarkCallout, [remarkWikilink, { knownSlugs }]],
+    remarkPlugins: [remarkCallout, [remarkWikilink, { knownSlugs, base }]],
     rehypePlugins: [rehypeTableWrap],
   },
 });
