@@ -33,6 +33,7 @@ const SECTIONS = [
   { id: 'cost', label: '🚚 ต้นทุน' },
   { id: 'strategy', label: '🎯 Pull Rate & กลยุทธ์' },
   { id: 'invest', label: '📊 ลงทุน' },
+  { id: 'compare', label: '🃏 เทียบตลาดอื่น' },
   { id: 'forecast', label: '🔮 พยากรณ์' },
 ];
 
@@ -121,6 +122,26 @@ const charts: Record<string, unknown> = {
   buckets: {
     type: 'doughnut',
     data: { labels: M.BUCKETS.map((b) => b.name), datasets: [{ data: M.BUCKETS.map((b) => b.pct), backgroundColor: M.BUCKETS.map((b) => b.color) }] },
+    options: { ...base, plugins: { legend: { position: 'bottom' } } },
+  },
+  marketsize: {
+    type: 'bar',
+    data: { labels: M.MARKET_SIZE.map((m) => m.game), datasets: [{ data: M.MARKET_SIZE.map((m) => m.usd), backgroundColor: M.MARKET_SIZE.map((m) => (m.game.includes('OP') ? red : blue)), borderRadius: 5 }] },
+    options: { ...base, indexAxis: 'y', plugins: noLegend, scales: { x: { title: { display: true, text: 'พันล้าน USD/ปี (ประเมิน)' } } } },
+  },
+  topcard: {
+    type: 'bar',
+    data: { labels: M.TOP_CARD.map((c) => c.market), datasets: [{ data: M.TOP_CARD.map((c) => c.usd), backgroundColor: M.TOP_CARD.map((c) => (c.market.includes('OP') ? red : '#8b5cf6')), borderRadius: 5 }] },
+    options: { ...base, indexAxis: 'y', plugins: noLegend, scales: { x: { type: 'logarithmic', title: { display: true, text: 'USD (log) · OP สูงสุด $24K vs Pokémon $16.5M' } } } },
+  },
+  age: {
+    type: 'bar',
+    data: { labels: M.MARKET_AGE.map((m) => m.game), datasets: [{ data: M.MARKET_AGE.map((m) => m.years), backgroundColor: M.MARKET_AGE.map((m) => (m.game === 'OP TCG' ? red : '#94a3b8')), borderRadius: 5 }] },
+    options: { ...base, plugins: noLegend, scales: { y: { title: { display: true, text: 'อายุตลาด (ปี)' } } } },
+  },
+  crossport: {
+    type: 'doughnut',
+    data: { labels: M.CROSS_PORTFOLIO.map((b) => b.name), datasets: [{ data: M.CROSS_PORTFOLIO.map((b) => b.pct), backgroundColor: M.CROSS_PORTFOLIO.map((b) => b.color) }] },
     options: { ...base, plugins: { legend: { position: 'bottom' } } },
   },
 };
@@ -327,6 +348,40 @@ const tone = (t: string) => (t === 'green' ? 'border-green-500 bg-green-50' : t 
         </div>
         <p class="mt-2 text-sm text-slate-500">🔑 อยากได้การ์ดใบไหน → ซื้อ single. การเปิดซอง = จ่ายเพื่อความสนุก/เสี่ยงโชค ไม่ใช่การลงทุน</p>
       </div>
+    </section>
+
+    <!-- ============ COMPARE OTHER MARKETS ============ -->
+    <section id="compare" class="scroll-mt-28 pt-10">
+      <h2 class="mb-1 text-xl font-bold">🃏 เทียบตลาดการ์ดอื่น (บริบทโลก)</h2>
+      <p class="mb-4 text-xs text-slate-500">OP TCG อายุ 4 ปี vs Pokémon/MTG 30+ ปี · ⚠️ ตัวเลขตลาดรวมประเมินยาก อ่านเป็นช่วง</p>
+
+      <div class="grid gap-5 lg:grid-cols-2">
+        <div class="card p-4"><h3 class="mb-1 font-bold">ขนาดตลาดต่อปี (พันล้าน USD)</h3><p class="mb-3 text-xs text-slate-500">OP เดี่ยว ~$170M ยังเล็กกว่า Pokémon/MTG หลายเท่า</p><div class="h-64"><canvas id="chart-marketsize"></canvas></div></div>
+        <div class="card p-4"><h3 class="mb-1 font-bold">การ์ดแพงสุดแต่ละตลาด (USD, log)</h3><p class="mb-3 text-xs text-slate-500">OP สูงสุด $24K ห่าง Pokémon $16.5M ~680×</p><div class="h-64"><canvas id="chart-topcard"></canvas></div></div>
+        <div class="card p-4"><h3 class="mb-1 font-bold">อายุตลาด (ปี)</h3><p class="mb-3 text-xs text-slate-500">OP/Lorcana ยังใหม่ — ยังไม่ผ่านวงจรบูม-แตกเต็มรอบ</p><div class="h-56"><canvas id="chart-age"></canvas></div></div>
+        <div class="card p-4"><h3 class="mb-1 font-bold">แนวทางกระจายพอร์ตข้ามตลาด</h3><p class="mb-3 text-xs text-slate-500">⚠️ ความเห็น ไม่ใช่คำแนะนำการเงิน · รอผล OP-17</p><div class="h-56"><canvas id="chart-crossport"></canvas></div></div>
+      </div>
+
+      <div class="card mt-5 p-4">
+        <h3 class="mb-2 font-bold">เทียบ 6 ตลาด — จุดชี้เป็นชี้ตาย</h3>
+        <div class="table-wrap"><table class="w-full text-sm">
+          <thead><tr class="text-left text-slate-500"><th class="p-2">ตลาด</th><th class="p-2">คุม supply</th><th class="p-2">IP จะจบ?</th><th class="p-2">วงจรตอนนี้</th><th class="p-2">ฟองสบู่ใหญ่สุด</th></tr></thead>
+          <tbody>{M.MARKET_COMPARE.map((m) => (<tr class="border-t border-[var(--border)]"><td class="p-2 font-medium">{m.game}</td><td class="p-2">{m.supply}</td><td class="p-2">{m.ipEnds}</td><td class="p-2">{m.cycle}</td><td class="p-2 text-slate-500">{m.crash}</td></tr>))}</tbody>
+        </table></div>
+        <p class="mt-2 text-xs text-amber-700">⚠️ จุดเสี่ยงใหญ่สุดของ OP: ไม่มี Reserved List (Bandai reprint ได้ทุกเวลา) + IP One Piece จะจบ — ต่างจาก MTG/กีฬาที่มีกลไกค้ำราคา</p>
+      </div>
+
+      <div class="card mt-5 p-4">
+        <h3 class="mb-2 font-bold">ความน่าลงทุนสำหรับคนไทย <span class="text-xs font-normal text-slate-400">(ความเห็น ไม่ใช่คำแนะนำการเงิน)</span></h3>
+        <div class="table-wrap"><table class="w-full text-sm">
+          <thead><tr class="text-left text-slate-500"><th class="p-2">ตลาด</th><th class="p-2">น่าลงทุน</th><th class="p-2">เหตุผล</th></tr></thead>
+          <tbody>{M.INVEST_RANK.map((r) => (<tr class="border-t border-[var(--border)]"><td class="p-2 font-medium">{r.market}</td><td class="whitespace-nowrap p-2 text-amber-500">{'⭐'.repeat(r.stars)}</td><td class="p-2 text-slate-500">{r.why}</td></tr>))}</tbody>
+        </table></div>
+      </div>
+
+      <p class="mt-3 text-sm">
+        <a href={noteLink('เทียบตลาดการ์ดอื่น')} class="text-[var(--accent)] hover:underline">📖 อ่านโน้ตเต็ม: เทียบตลาดการ์ดอื่น vs OP TCG →</a>
+      </p>
     </section>
 
     <!-- ============ FORECAST ============ -->

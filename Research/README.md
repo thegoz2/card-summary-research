@@ -14,7 +14,7 @@ Open this folder in Obsidian via **Open folder as vault** if it isn't already lo
 
 ---
 
-## 📚 โปรเจกต์: One Piece TCG — ทำกำไร (31 โน้ต, 18 รอบวิจัย adversarial)
+## 📚 โปรเจกต์: One Piece TCG — ทำกำไร (32 โน้ต, 18 รอบวิจัย adversarial)
 
 > เริ่มที่ [[One Piece TCG - ทำกำไร (ภาพรวม)]] (hub) หรือ [[แผนปฏิบัติ OP TCG ตามงบประมาณ]] (ลงมือทำ)
 
@@ -47,6 +47,7 @@ Open this folder in Obsidian via **Open folder as vault** if it isn't already lo
 - [[ตลาด OP TCG ในไทย (เจาะลึก)]]
 - [[ตลาด OP TCG ไทย — ข้อมูลจริง (verified มิ.ย. 2026)]] — ราคา SASOM จริง + premium/discount เทียบสากล + คอมมูนิตี้
 - [[ตลาด OP TCG ต่างประเทศ — เทียบรายภูมิภาค (มิ.ย. 2026)]] — JP/US/SG/EU/AU/KR/CN เทียบราคา + arbitrage
+- [[เทียบตลาดการ์ดอื่น vs OP TCG (Pokemon-MTG-Sports-Lorcana)]] — บริบทตลาดการ์ดโลก + บทเรียนต่อ OP
 
 ### 💰 ราคา / ดีมานด์
 - [[ทำไมการ์ด OP TCG ถึงแพง (ปัจจัยราคา)]] — ปัจจัยภายใน

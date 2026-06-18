@@ -326,6 +326,63 @@ export const TIMELINE = [
   { code: 'OP-17', name: "The World's Strongest Warriors", date: 'ส.ค. 2026 ⭐' },
 ];
 
+// ============================================================
+// 21) OTHER CARD MARKETS — OP TCG vs Pokémon / MTG / Sports / Lorcana
+// ⚠️ ตัวเลขตลาดรวมประเมินยาก อ่านเป็น "ช่วง"
+// ============================================================
+export const MARKET_SIZE = [
+  { game: 'Sports (รวม)', usd: 9.21, conf: '⚠️' },
+  { game: 'Pokémon', usd: 2.9, conf: '✅' },
+  { game: 'Bandai card (รวม OP)', usd: 1.99, conf: '⚠️' },
+  { game: 'MTG', usd: 1.72, conf: '✅' },
+  { game: 'OP TCG (เดี่ยว)', usd: 0.17, conf: '⚠️' },
+];
+
+export const TOP_CARD = [
+  { market: 'Pokémon · Pikachu Illustrator', usd: 16490000 },
+  { market: 'Baseball · Mantle 1952', usd: 12600000 },
+  { market: 'MTG · Black Lotus Alpha', usd: 3000000 },
+  { market: 'Soccer · Messi 2004-05', usd: 1500000 },
+  { market: 'OP TCG · Luffy OP13-118', usd: 24100 },
+  { market: 'Lorcana', usd: 1000 },
+];
+
+export const MARKET_AGE = [
+  { game: 'Baseball', years: 70 },
+  { game: 'Soccer', years: 60 },
+  { game: 'MTG', years: 32 },
+  { game: 'Pokémon', years: 30 },
+  { game: 'OP TCG', years: 4 },
+  { game: 'Lorcana', years: 3 },
+];
+
+export const MARKET_COMPARE = [
+  { game: '🟡 Pokémon', supply: '❌ ไม่มี', ipEnds: '❌ อมตะ', cycle: 'ปรับฐาน', crash: '2020-21: +350% → −77%' },
+  { game: '🔵 MTG', supply: '✅ Reserved List', ipEnds: '❌ อมตะ', cycle: 'บูม +60%', crash: 'Chronicles: $50 → $2' },
+  { game: '⚾ Baseball', supply: '✅ vintage', ipEnds: '❌ กีฬาจริง', cycle: 'ฟื้นช้า', crash: '2021: +300-1500% → −50-80%' },
+  { game: '⚽ Soccer', supply: '✅ vintage', ipEnds: '❌ กีฬาจริง', cycle: 'โต (World Cup)', crash: 'ตาม sports 2021' },
+  { game: '🏰 Lorcana', supply: '❌ ไม่มี', ipEnds: '❌ Disney', cycle: 'normalizing', crash: 'speculator ถอน 2025' },
+  { game: '🏴‍☠️ OP TCG', supply: '❌ ไม่มี', ipEnds: '🔴 จะจบ', cycle: 'Distribution', crash: 'กำลังทดสอบ (ยังไม่ครบ 1 รอบ)' },
+];
+
+// ความน่าลงทุนสำหรับคนไทย (OPINION ไม่ใช่คำแนะนำการเงิน)
+export const INVEST_RANK = [
+  { market: 'OP TCG blue-chip (sealed OP-01, MR PSA10)', stars: 3, why: 'เข้าถึงได้ + scene ไทยแข็ง · แต่ไม่มี Reserved List, IP จะจบ' },
+  { market: 'Soccer cards (Messi/Mbappe PSA)', stars: 3, why: 'IP จริง + World Cup 2026 catalyst · liquidity ไทยต่ำ' },
+  { market: 'Pokémon vintage', stars: 2, why: 'IP อมตะ แต่ทุนสูงเกินงบส่วนใหญ่' },
+  { market: 'MTG Reserved List', stars: 2, why: 'ค้ำราคาดี แต่ liquidity ไทยต่ำมาก' },
+  { market: 'Lorcana / Baseball vintage', stars: 1, why: 'ตลาดไทยเกือบไม่มี / ไม่คุ้น' },
+  { market: 'OP TCG flip TR/SP ชุดใหม่', stars: 1, why: 'เสี่ยงสูงมาก −30-50% ใน 4-8 สัปดาห์' },
+];
+
+// แนวทางกระจายพอร์ตข้ามตลาด (OPINION)
+export const CROSS_PORTFOLIO = [
+  { name: 'Core OP TCG (blue-chip)', pct: 45, color: '#dc2626' },
+  { name: 'Cash (รอผล OP-17)', pct: 35, color: '#3b82f6' },
+  { name: 'Soccer PSA10 (World Cup)', pct: 15, color: '#16a34a' },
+  { name: 'อื่นๆ', pct: 5, color: '#94a3b8' },
+];
+
 export const sourceNotes = [
   'บทวิเคราะห์ฟองสบู่ OP TCG (กลางปี 2026)',
   'ตลาด OP TCG ต่างประเทศ — เทียบรายภูมิภาค (มิ.ย. 2026)',
@@ -333,4 +390,5 @@ export const sourceNotes = [
   'ค่าเกรด PSA-CGC และ ภาษีนำเข้า Carton - OP TCG',
   'Pull Rate อัตราดรอป OP TCG',
   'Playbook เก็งกำไร OP TCG (มิ.ย. 2026)',
+  'เทียบตลาดการ์ดอื่น vs OP TCG',
 ];
