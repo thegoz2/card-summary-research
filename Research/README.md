@@ -1,7 +1,7 @@
 ---
 title: Research Vault
 created: 2026-06-15
-updated: 2026-06-16
+updated: 2026-06-24
 tags: [index]
 ---
 
@@ -62,6 +62,46 @@ Open this folder in Obsidian via **Open folder as vault** if it isn't already lo
 - [[วิธีพรี OP-17 ในไทย]] — ร้าน/เพจ/ราคาอ้างอิง
 - [[การ์ดปลอม และ วิธีดูของแท้ OP TCG]]
 - [[การเก็บรักษาการ์ด (สภาพอากาศไทย)]]
+
+---
+
+## 🏰 โปรเจกต์: Disney Lorcana — ทำกำไร (23 โน้ต, เริ่ม 24 มิ.ย. 2026)
+
+> เริ่มที่ [[Disney Lorcana — ทำกำไร (ภาพรวม)]] (hub) หรือ [[แผนปฏิบัติ Lorcana ตามงบประมาณ]] (ลงมือทำ) — ต่อยอดจากโปรเจกต์ OP TCG ตอน "ราคาเริ่มมา"
+> **ข้อสรุป thesis "ราคาเริ่มมา":** จริงบางส่วน — ยอดขายบริษัทตกปี 2025 + อันดับร่วงหลัง One Piece **แต่** ราคา singles ตัว chase ฟื้นจริงปี 2026 (Iconic ใหม่ + Pixar + นักสะสม Disney) ⚠️ Ravensburger เป็นค่าย anti-scarcity → sealed เป็น store of value ที่อ่อนกว่า OP
+
+### 🏠 ศูนย์กลาง
+- [[Disney Lorcana — ทำกำไร (ภาพรวม)]] — hub เชื่อมทุกโน้ต + ตอบ thesis ราคา
+- [[แผนปฏิบัติ Lorcana ตามงบประมาณ]] — แผนทีละขั้นตามงบ < 20k / 20k-100k / > 100k (จุดเริ่มลงมือ)
+- [[อภิธานศัพท์ Lorcana (Glossary)]] — 📖 ศัพท์/กลไก/keyword/format อธิบายง่ายๆ
+- [[Tracking Sheet — สัญญาณเตือนฟองสบู่ Lorcana (รายเดือน)]] — 📊 กรอกรายเดือน จับจังหวะก่อนตลาดเลี้ยว
+
+### 📈 กลยุทธ์ / ตลาด / แนวโน้ม
+- [[Playbook เก็งกำไร Lorcana — flip-swing-hold + timing]] — 💹 รวมศูนย์ flip/swing/hold + rotation + ทำไมคนเจ๊ง
+- [[ตลาด Lorcana 2023-2026 — ราคาเริ่มฟื้นจริงไหม]] — ไทม์ไลน์ + ยอดขายตก 2025 + สัญญาณฟื้น 2026 + อันดับ TCG โลก
+- [[พยากรณ์ตลาด Lorcana 2026-2028]] — 🔮 3 scenario (Bull/Base/Bear) + ตัวแปรชี้ขาด
+- [[Deck meta Lorcana ปัจจุบัน (มิ.ย. 2026)]] — meta แข่งขัน + การ์ด play-demand + rotation risk
+- [[อิทธิพลภายนอก + กลุ่มลูกค้า + ดิจิทัล Lorcana]] — catalyst (หนัง/D23/Pixar) + ใครซื้อ + gap ดิจิทัล
+- [[Lorcana vs One Piece TCG — ลงทุนตัวไหน]] — เทียบ head-to-head, anti-scarcity, Disney moat, catalyst
+
+### 🏆 เลือกการ์ด / เก็งกำไร
+- [[ตัวละคร Disney น่าเก็บเก็งกำไร Lorcana — watchlist (มิ.ย. 2026)]] — watchlist รายตัวละคร (flagship/เจ้าหญิง/วายร้าย/cult/Pixar) + ราคา anchor + myth ราคาปั่น
+- [[Watchlist ราคาเป้าซื้อ-ขาย Lorcana (มิ.ย. 2026)]] — 🎯 ราคาเป้า BUY/SELL รายใบ (บัคเก็ต A–E) + กฎเทรด
+- [[รายชื่อชุด Lorcana + ระบบ rarity + chase cards]] — ชุด 1–14, rarity 8 ระดับ, First Chapter saga, การ์ดแพง, MSRP
+- [[Pull Rate ดรอปเรต Lorcana + โอกาสได้การ์ดดี]] — โอกาสได้ chase, foil slot, box-opening จริง, EV, gem rate
+
+### 🛒 ซื้อ / ผลิต / เก็บ
+- [[ซื้อ Lorcana ราคาต้นน้ำ — distributor และ ช่องทาง (มิ.ย. 2026)]] — distribution chain, ซื้อใต้ MSRP (US/EU/UK/JP), Saka Saka
+- [[นำเข้า Lorcana มาขายในไทย คุ้มไหม — landed cost (มิ.ย. 2026)]] — ค่าส่ง+อากร+VAT, break-even, ⚖️ ความเสี่ยง "ไพ่" สรรพสามิต
+- [[การผลิต + reprint Lorcana — supply ทำงานยังไง]] — ผลิตที่ Cartamundi US, ปรัชญา reprint, อะไร scarcity แท้
+- [[การ์ดปลอม และ วิธีดูของแท้ Lorcana]] — ของปลอม (Enchanted/sealed reseal) + วิธีดู single/slab
+- [[การเก็บรักษา Lorcana (สภาพอากาศไทย)]] — ความชื้นไทย + กระดาษยุโรปขอบขาวง่าย + ตู้กันชื้น
+
+### 💰 ขาย / เกรด / ภาษี
+- [[ฝั่งขาย Lorcana + ภาษีกำไรไทย]] — ขายในไทยที่ไหน/ค่าธรรมเนียม + ภาษีเงินได้ ม.40(8) + VAT
+- [[ขายออกนอก — ส่งออก Lorcana เข้าตลาดตะวันตก]] — eBay (เปิด) / TCGplayer-Cardmarket (ปิด) + arbitrage + ⚖️ excise ส่งออก
+- [[กลยุทธ์ส่งเกรด Lorcana (PSA-CGC) + ส่งจากไทย]] — ค่าธรรมเนียม PSA/CGC 2026 (⚠️ PSA Value ปิด), ส่งจากไทย, break-even
+- [[ตลาด Lorcana ในไทย + SEA (มิ.ย. 2026)]] — Saka Saka (ทางการ ก.ย. 2025), ซื้อที่ไหน, ราคา THB, คอมมูนิตี้, ภาษีนำเข้า
 
 ---
 

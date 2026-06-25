@@ -75,6 +75,30 @@ export function categoryOf(note: Note): Category {
   return BY_KEY.other;
 }
 
+// ---- Project (which research project a note belongs to) ----
+export interface Project {
+  key: 'optcg' | 'lorcana';
+  label: string;
+  icon: string;
+}
+
+export const PROJECTS: Project[] = [
+  { key: 'optcg', label: 'One Piece TCG', icon: '🏴‍☠️' },
+  { key: 'lorcana', label: 'Disney Lorcana', icon: '🏰' },
+];
+
+export function projectOf(note: Note): Project {
+  const tags = noteTags(note).map((t) => t.toLowerCase());
+  const title = noteTitle(note);
+  // Cross-over notes carry both tags — the one listed FIRST is the owning project.
+  const opIdx = tags.findIndex((t) => t === 'one-piece' || t === 'op-tcg');
+  const lorIdx = tags.findIndex((t) => t === 'lorcana' || t === 'disney');
+  if (lorIdx !== -1 && (opIdx === -1 || lorIdx < opIdx)) return PROJECTS[1];
+  if (opIdx !== -1) return PROJECTS[0];
+  if (/lorcana/i.test(title) && !/one piece|op[- ]tcg/i.test(title)) return PROJECTS[1];
+  return PROJECTS[0];
+}
+
 // A short plain-text preview from the note body for index cards.
 export function excerpt(body = '', max = 160): string {
   const lines = body.split('\n');

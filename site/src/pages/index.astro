@@ -6,6 +6,8 @@ import {
   noteSlug,
   noteTags,
   categoryOf,
+  projectOf,
+  PROJECTS,
   excerpt,
   allCategories,
 } from '../lib/notes';
@@ -14,23 +16,28 @@ import { url } from '../lib/url';
 const notes = await getCollection('notes');
 
 const items = notes
-  .map((n) => {
-    const cat = categoryOf(n);
-    return {
-      slug: noteSlug(n),
-      title: noteTitle(n),
-      tags: noteTags(n),
-      excerpt: excerpt(n.body ?? ''),
-      cat: cat.key,
-      date: n.data.date ? new Date(n.data.date).toISOString().slice(0, 10) : '',
-    };
-  })
+  .map((n) => ({
+    slug: noteSlug(n),
+    title: noteTitle(n),
+    tags: noteTags(n),
+    excerpt: excerpt(n.body ?? ''),
+    cat: categoryOf(n).key,
+    project: projectOf(n).key,
+    date: n.data.date ? new Date(n.data.date).toISOString().slice(0, 10) : '',
+  }))
   .sort((a, b) => a.title.localeCompare(b.title, 'th'));
 
-const cats = allCategories();
-const grouped = cats
+const grouped = allCategories()
   .map((c) => ({ ...c, notes: items.filter((i) => i.cat === c.key) }))
   .filter((c) => c.notes.length > 0);
+
+const projCount = (k: string) => items.filter((i) => i.project === k).length;
+
+// overview note link per project (avoid hardcoding Thai slugs)
+const overviewLink = (projKey: string) => {
+  const n = notes.find((x) => projectOf(x).key === projKey && /ภาพรวม/.test(noteTitle(x)));
+  return n ? url(`/notes/${noteSlug(n)}/`) : url('/notes/');
+};
 
 const lastUpdated = notes
   .map((n) => (n.data.updated || n.data.date) as Date | undefined)
@@ -43,38 +50,39 @@ const lastUpdatedStr = lastUpdated ? new Date(lastUpdated).toISOString().slice(0
 <Base>
   <main class="mx-auto max-w-6xl px-4 pb-16">
     <!-- Hero -->
-    <section class="grid gap-4 py-8 md:grid-cols-3">
-      <div class="md:col-span-2 flex flex-col justify-center">
-        <h1 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
-          One Piece TCG — งานวิจัยทำกำไร
-        </h1>
-        <p class="mt-3 max-w-2xl text-slate-600">
-          รวมงานวิจัย {notes.length} โน้ตจาก Obsidian — กลยุทธ์ ต้นทุน ราคา ตลาด และสัญญาณเตือนฟองสบู่
-          อ่านง่ายในที่เดียว พร้อม Dashboard วิเคราะห์ตัวเลข
-        </p>
-        <div class="mt-5 flex flex-wrap gap-3">
-          <a
-            href={url('/dashboard/')}
-            class="rounded-xl bg-[var(--accent)] px-5 py-2.5 font-semibold text-white shadow-sm transition hover:bg-[var(--brand-700,#b91c1c)]"
-            >📊 เปิด Dashboard วิเคราะห์</a>
-          <a
-            href={url('/notes/one-piece-tcg-ทำกำไร-ภาพรวม/')}
-            class="rounded-xl border border-[var(--border)] bg-white px-5 py-2.5 font-semibold text-slate-700 transition hover:bg-slate-50"
-            >📖 อ่านโน้ตภาพรวม</a>
+    <section class="py-8">
+      <h1 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
+        งานวิจัยการ์ดสะสม — ทำกำไร
+      </h1>
+      <p class="mt-3 max-w-2xl text-slate-600">
+        รวมงานวิจัย {notes.length} โน้ตจาก Obsidian · 2 โปรเจกต์ — กลยุทธ์ ต้นทุน ราคา ตลาด
+        และสัญญาณเตือนฟองสบู่ · อัปเดตล่าสุด {lastUpdatedStr}
+      </p>
+
+      <div class="mt-5 grid gap-4 sm:grid-cols-2">
+        <!-- One Piece -->
+        <div class="card flex flex-col p-5">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2 text-lg font-bold">🏴‍☠️ One Piece TCG</div>
+            <span class="chip">{projCount('optcg')} โน้ต</span>
+          </div>
+          <p class="mt-2 text-sm text-slate-500">เก็งกำไร sealed/PSA · ตลาด JP/EN · มี Dashboard เต็ม</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <a href={url('/dashboard/')} class="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90">📊 Dashboard</a>
+            <a href={overviewLink('optcg')} class="rounded-lg border border-[var(--border)] bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">📖 ภาพรวม</a>
+          </div>
         </div>
-      </div>
-      <div class="card flex flex-col justify-center gap-3 p-5">
-        <div class="flex items-center justify-between">
-          <span class="text-sm text-slate-500">จำนวนโน้ต</span>
-          <span class="text-2xl font-extrabold">{notes.length}</span>
-        </div>
-        <div class="flex items-center justify-between">
-          <span class="text-sm text-slate-500">หมวดหมู่</span>
-          <span class="text-2xl font-extrabold">{grouped.length}</span>
-        </div>
-        <div class="flex items-center justify-between">
-          <span class="text-sm text-slate-500">อัปเดตล่าสุด</span>
-          <span class="font-semibold">{lastUpdatedStr}</span>
+        <!-- Lorcana -->
+        <div class="card flex flex-col p-5">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2 text-lg font-bold">🏰 Disney Lorcana</div>
+            <span class="chip">{projCount('lorcana')} โน้ต</span>
+          </div>
+          <p class="mt-2 text-sm text-slate-500">IP Disney/Pixar · สะสมระยะยาว · anti-scarcity (ไม่มี Reserved List)</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <a href={overviewLink('lorcana')} class="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90">📖 ภาพรวม</a>
+            <button data-jump="lorcana" class="rounded-lg border border-[var(--border)] bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">🔎 ดูโน้ตทั้งหมด</button>
+          </div>
         </div>
       </div>
     </section>
@@ -88,8 +96,14 @@ const lastUpdatedStr = lastUpdated ? new Date(lastUpdated).toISOString().slice(0
         class="w-full rounded-xl border border-[var(--border)] bg-white px-4 py-2.5 text-sm outline-none focus:border-[var(--accent)]"
         autocomplete="off"
       />
-      <div id="cat-filter" class="mt-3 flex flex-wrap gap-2">
-        <button class="chip chip-active" data-cat="all">ทั้งหมด</button>
+      <div id="proj-filter" class="mt-3 flex flex-wrap gap-2">
+        <button class="chip chip-active" data-proj="all">ทุกโปรเจกต์ ({notes.length})</button>
+        {PROJECTS.map((p) => (
+          <button class="chip" data-proj={p.key}>{p.icon} {p.label} ({projCount(p.key)})</button>
+        ))}
+      </div>
+      <div id="cat-filter" class="mt-2 flex flex-wrap gap-2">
+        <button class="chip chip-active" data-cat="all">ทุกหมวด</button>
         {grouped.map((c) => (
           <button class="chip" data-cat={c.key}>{c.icon} {c.label}</button>
         ))}
@@ -109,6 +123,7 @@ const lastUpdatedStr = lastUpdated ? new Date(lastUpdated).toISOString().slice(0
               <a
                 href={url(`/notes/${n.slug}/`)}
                 class="note-card card group flex flex-col p-4 transition hover:border-[var(--accent)] hover:shadow-sm"
+                data-project={n.project}
                 data-title={n.title.toLowerCase()}
                 data-tags={n.tags.join(' ').toLowerCase()}
                 data-text={n.excerpt.toLowerCase()}
@@ -137,20 +152,22 @@ const lastUpdatedStr = lastUpdated ? new Date(lastUpdated).toISOString().slice(0
   <script is:inline>
     const search = document.getElementById('search');
     const groups = Array.from(document.querySelectorAll('.note-group'));
-    const chips = Array.from(document.querySelectorAll('#cat-filter button'));
+    const catChips = Array.from(document.querySelectorAll('#cat-filter button'));
+    const projChips = Array.from(document.querySelectorAll('#proj-filter button'));
     const noResults = document.getElementById('no-results');
     let activeCat = 'all';
+    let activeProj = 'all';
 
     function apply() {
       const q = (search.value || '').trim().toLowerCase();
       let visibleTotal = 0;
       for (const group of groups) {
-        const cat = group.dataset.cat;
-        const catOk = activeCat === 'all' || activeCat === cat;
+        const catOk = activeCat === 'all' || activeCat === group.dataset.cat;
         let groupVisible = 0;
         for (const card of group.querySelectorAll('.note-card')) {
           const hay = card.dataset.title + ' ' + card.dataset.tags + ' ' + card.dataset.text;
-          const match = catOk && (!q || hay.includes(q));
+          const projOk = activeProj === 'all' || activeProj === card.dataset.project;
+          const match = catOk && projOk && (!q || hay.includes(q));
           card.style.display = match ? '' : 'none';
           if (match) groupVisible++;
         }
@@ -160,13 +177,25 @@ const lastUpdatedStr = lastUpdated ? new Date(lastUpdated).toISOString().slice(0
       noResults.classList.toggle('hidden', visibleTotal > 0);
     }
 
+    function setProj(key) {
+      activeProj = key;
+      projChips.forEach((c) => c.classList.toggle('chip-active', c.dataset.proj === key));
+      apply();
+    }
+
     search.addEventListener('input', apply);
-    chips.forEach((chip) => {
-      chip.addEventListener('click', () => {
-        activeCat = chip.dataset.cat;
-        chips.forEach((c) => c.classList.toggle('chip-active', c === chip));
-        apply();
-      });
-    });
+    catChips.forEach((chip) => chip.addEventListener('click', () => {
+      activeCat = chip.dataset.cat;
+      catChips.forEach((c) => c.classList.toggle('chip-active', c === chip));
+      apply();
+    }));
+    projChips.forEach((chip) => chip.addEventListener('click', () => setProj(chip.dataset.proj)));
+
+    document.querySelectorAll('[data-jump]').forEach((btn) =>
+      btn.addEventListener('click', () => {
+        setProj(btn.dataset.jump);
+        document.getElementById('groups')?.scrollIntoView({ behavior: 'smooth' });
+      })
+    );
   </script>
 </Base>
