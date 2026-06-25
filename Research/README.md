@@ -65,7 +65,7 @@ Open this folder in Obsidian via **Open folder as vault** if it isn't already lo
 
 ---
 
-## 🏰 โปรเจกต์: Disney Lorcana — ทำกำไร (23 โน้ต, เริ่ม 24 มิ.ย. 2026)
+## 🏰 โปรเจกต์: Disney Lorcana — ทำกำไร (27 โน้ต, เริ่ม 24 มิ.ย. 2026)
 
 > เริ่มที่ [[Disney Lorcana — ทำกำไร (ภาพรวม)]] (hub) หรือ [[แผนปฏิบัติ Lorcana ตามงบประมาณ]] (ลงมือทำ) — ต่อยอดจากโปรเจกต์ OP TCG ตอน "ราคาเริ่มมา"
 > **ข้อสรุป thesis "ราคาเริ่มมา":** จริงบางส่วน — ยอดขายบริษัทตกปี 2025 + อันดับร่วงหลัง One Piece **แต่** ราคา singles ตัว chase ฟื้นจริงปี 2026 (Iconic ใหม่ + Pixar + นักสะสม Disney) ⚠️ Ravensburger เป็นค่าย anti-scarcity → sealed เป็น store of value ที่อ่อนกว่า OP
@@ -87,6 +87,7 @@ Open this folder in Obsidian via **Open folder as vault** if it isn't already lo
 ### 🏆 เลือกการ์ด / เก็งกำไร
 - [[ตัวละคร Disney น่าเก็บเก็งกำไร Lorcana — watchlist (มิ.ย. 2026)]] — watchlist รายตัวละคร (flagship/เจ้าหญิง/วายร้าย/cult/Pixar) + ราคา anchor + myth ราคาปั่น
 - [[Watchlist ราคาเป้าซื้อ-ขาย Lorcana (มิ.ย. 2026)]] — 🎯 ราคาเป้า BUY/SELL รายใบ (บัคเก็ต A–E) + กฎเทรด
+- [[อันดับความนิยมตัวละคร Disney + นัยต่อ Lorcana]] — 📊 อันดับความนิยมตัวละคร (merch/หนัง) + ตัวที่ "ดังแต่การ์ดยังถูก" (Maui/Maleficent)
 - [[รายชื่อชุด Lorcana + ระบบ rarity + chase cards]] — ชุด 1–14, rarity 8 ระดับ, First Chapter saga, การ์ดแพง, MSRP
 - [[Pull Rate ดรอปเรต Lorcana + โอกาสได้การ์ดดี]] — โอกาสได้ chase, foil slot, box-opening จริง, EV, gem rate
 
@@ -101,6 +102,9 @@ Open this folder in Obsidian via **Open folder as vault** if it isn't already lo
 - [[ฝั่งขาย Lorcana + ภาษีกำไรไทย]] — ขายในไทยที่ไหน/ค่าธรรมเนียม + ภาษีเงินได้ ม.40(8) + VAT
 - [[ขายออกนอก — ส่งออก Lorcana เข้าตลาดตะวันตก]] — eBay (เปิด) / TCGplayer-Cardmarket (ปิด) + arbitrage + ⚖️ excise ส่งออก
 - [[กลยุทธ์ส่งเกรด Lorcana (PSA-CGC) + ส่งจากไทย]] — ค่าธรรมเนียม PSA/CGC 2026 (⚠️ PSA Value ปิด), ส่งจากไทย, break-even
+- [[เทียบค่ายตรวจเกรด (PSA-CGC-BGS-SGC-TAG-CCC) ข้อดีข้อเสีย]] — ข้อดี-ข้อเสียรายค่าย + เลือกค่ายไหนตามสถานการณ์
+- [[เจาะลึก PSA vs TAG vs BGS — fee, break-even, ส่งจากไทย]] — fee tier 2026 เต็ม + break-even + ขั้นตอนส่งจากไทยรายค่าย
+- [[ประวัติแบรนด์ตรวจเกรด (PSA-BGS-SGC-CGC-TAG)]] — กำเนิด third-party grading + ประวัติรายค่าย + การควบรวม Collectors (~80%)
 - [[ตลาด Lorcana ในไทย + SEA (มิ.ย. 2026)]] — Saka Saka (ทางการ ก.ย. 2025), ซื้อที่ไหน, ราคา THB, คอมมูนิตี้, ภาษีนำเข้า
 
 ---

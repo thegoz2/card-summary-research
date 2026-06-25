@@ -239,8 +239,53 @@ export const SCARCITY = {
   elastic: ['การ์ด base ธรรมดา', 'Epic (reprint ได้)', 'sealed box ชุด in-print', 'staple ที่ถูก reprint'],
 };
 
+// 25) GRADING COMPANIES — เทียบ 6 ค่าย (resale % = consensus, PARTIAL)
+export const GRADERS = [
+  { co: 'PSA', cheapest: 79.99, resale: 100, asia: '✅ HK', fit: 'chase แพง (gold standard)', indep: false },
+  { co: 'CGC', cheapest: 17, resale: 70, asia: '✅ HK', fit: 'default ทั่วไป (ถูก+ปริมาณ)', indep: true },
+  { co: 'BGS', cheapest: 14.95, resale: 50, asia: '❌', fit: 'ใบเดียว Black Label', indep: false },
+  { co: 'SGC', cheapest: 15, resale: 30, asia: '❌', fit: '❌ (vintage/sports)', indep: false },
+  { co: 'TAG', cheapest: 22, resale: 20, asia: '⚠️ HK/SG', fit: 'รายงาน AI objective', indep: true },
+  { co: 'CCC', cheapest: 19, resale: 15, asia: '❌', fit: '❌ (EU niche)', indep: true },
+];
+export const GRADER_NOTE =
+  'Collectors (แม่ PSA) ซื้อ SGC + BGS แล้ว = ครอง ~80% ตลาด · เหลือ CGC + TAG เป็น independent · PSA Value tier ปิด มิ.ย. 2026 → floor = Regular $79.99';
+
+// 26) Break-even all-in cost/ใบ (USD, batch) — PSA / TAG / BGS
+export const BREAKEVEN = [
+  { co: 'PSA (HK/CardKub)', allin: 112, worth: 'PSA10 ≳ $400' },
+  { co: 'TAG (HK/SG)', allin: 62, worth: 'TAG10 ≳ $200' },
+  { co: 'BGS (SG/US)', allin: 57, worth: 'คุ้มเฉพาะ Black Label' },
+];
+
+// 27) Disney franchise — รายได้สะสม all-time ($B, legacy เฟ้อ ไม่ใช่รายปี)
+export const FRANCHISE = [
+  { name: 'Mickey & Friends', usd: 61.2 },
+  { name: 'Winnie the Pooh', usd: 50.2 },
+  { name: 'Disney Princess (รวม)', usd: 45.4 },
+  { name: 'Cars (Pixar)', usd: 21.5 },
+  { name: 'Toy Story (Pixar)', usd: 16 },
+  { name: 'Frozen', usd: 13.9 },
+];
+
+// 28) Annual merch ($B) — demand ปัจจุบัน (สัญญาณดีสุด)
+export const MERCH = [
+  { name: 'Mickey & Friends', usd: 9 },
+  { name: 'Stitch (FY2025, โต 10× ใน 6 ปี)', usd: 4 },
+];
+
+// 29) Asymmetric upside (ดังแต่การ์ดยังถูก + มี catalyst)
+export const UPSIDE = [
+  { pick: '🔥 Maui / Moana', signal: 'หนัง Moana live-action 10 ก.ค. 2026', note: 'Maui Enchanted ~$20 (ตก) = setup ดีสุด · Moana Iconic กำลังขึ้น' },
+  { pick: 'Maleficent', signal: 'วายร้าย #1 (Ranker)', note: 'ยังไม่มีการ์ด top-value — ถ้าออก Enchanted/Iconic ดีมานด์แรง' },
+  { pick: 'Scar / Ursula', signal: 'ดีมานด์วายร้ายพิสูจน์แล้ว (Halloween ขายหมด)', note: 'ยังไม่มี marquee chase' },
+  { pick: 'Elsa / Anna', signal: 'Frozen 3 (24 พ.ย. 2027)', note: 'catalyst ระยะยาว printing ใหม่' },
+];
+
 export const sourceNotes = [
   'Disney Lorcana — ทำกำไร (ภาพรวม)',
+  'เทียบค่ายตรวจเกรด (PSA-CGC-BGS-SGC-TAG-CCC) ข้อดีข้อเสีย',
+  'อันดับความนิยมตัวละคร Disney + นัยต่อ Lorcana',
   'ตลาด Lorcana 2023-2026 — ราคาเริ่มฟื้นจริงไหม',
   'พยากรณ์ตลาด Lorcana 2026-2028',
   'Watchlist ราคาเป้าซื้อ-ขาย Lorcana (มิ.ย. 2026)',

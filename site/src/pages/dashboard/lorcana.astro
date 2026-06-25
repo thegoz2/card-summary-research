@@ -18,6 +18,7 @@ const SECTIONS = [
   { id: 'price', label: '💰 ราคา' },
   { id: 'cards', label: '🏆 การ์ด & Rarity' },
   { id: 'cost', label: '🚚 ต้นทุน' },
+  { id: 'graders', label: '🎖️ ค่ายเกรด & ตัวละคร' },
   { id: 'strategy', label: '🎯 กลยุทธ์' },
   { id: 'versus', label: '⚖️ เทียบ OP' },
 ];
@@ -99,6 +100,26 @@ const charts: Record<string, unknown> = {
     type: 'doughnut',
     data: { labels: L.PORTFOLIO.map((b) => b.name), datasets: [{ data: L.PORTFOLIO.map((b) => b.pct), backgroundColor: L.PORTFOLIO.map((b) => b.color) }] },
     options: { ...base, plugins: { legend: { position: 'bottom' } } },
+  },
+  gradersFee: {
+    type: 'bar',
+    data: { labels: L.GRADERS.map((g) => g.co), datasets: [{ data: L.GRADERS.map((g) => g.cheapest), backgroundColor: L.GRADERS.map((g) => (g.indep ? green : '#94a3b8')), borderRadius: 5 }] },
+    options: { ...base, plugins: noLegend, scales: { y: { title: { display: true, text: 'ถูกสุด USD/ใบ · เขียว=independent' } } } },
+  },
+  gradersResale: {
+    type: 'bar',
+    data: { labels: L.GRADERS.map((g) => g.co), datasets: [{ data: L.GRADERS.map((g) => g.resale), backgroundColor: L.GRADERS.map((g) => (g.co === 'PSA' ? red : purple)), borderRadius: 5 }] },
+    options: { ...base, plugins: noLegend, scales: { y: { title: { display: true, text: 'resale % เทียบ PSA10 (consensus)' } } } },
+  },
+  breakeven: {
+    type: 'bar',
+    data: { labels: L.BREAKEVEN.map((b) => b.co), datasets: [{ data: L.BREAKEVEN.map((b) => b.allin), backgroundColor: purple, borderRadius: 5 }] },
+    options: { ...base, indexAxis: 'y', plugins: noLegend, scales: { x: { title: { display: true, text: 'all-in ต้นทุน/ใบ (USD, batch)' } } } },
+  },
+  franchise: {
+    type: 'bar',
+    data: { labels: L.FRANCHISE.map((f) => f.name), datasets: [{ data: L.FRANCHISE.map((f) => f.usd), backgroundColor: purple, borderRadius: 5 }] },
+    options: { ...base, indexAxis: 'y', plugins: noLegend, scales: { x: { title: { display: true, text: 'รายได้สะสม $B (all-time)' } } } },
   },
 };
 const chartsJson = JSON.stringify(charts).replaceAll('<', '\\u003c');
@@ -231,6 +252,63 @@ const topIconic = L.SINGLES[0];
         <div class="card p-4"><h3 class="mb-1 font-bold">ค่าธรรมเนียมขาย (% all-in)</h3><p class="mb-3 text-xs text-slate-500">FB ไทยฟรี · eBay แพงสุด (~18%) แต่เป็นช่องส่งออกหลัก</p><div class="h-64"><canvas id="chart-fees"></canvas></div></div>
       </div>
       <div class="mt-3 rounded-lg bg-red-50 p-3 text-sm text-red-800">⚖️ <b>"ไพ่" = สินค้าควบคุมสรรพสามิตไทย</b> — นำเข้า/ขายต้องมีใบอนุญาต (พ.ร.บ.สรรพสามิต 2560) · เคยมีเคสยึด 33,800 สำรับ ปรับ 7.91 ล้านบาท · กระทบทั้งนำเข้า+ส่งออก TCG</div>
+    </section>
+
+    <!-- GRADERS & CHARACTERS -->
+    <section id="graders" class="scroll-mt-28 pt-10">
+      <h2 class="mb-1 text-xl font-bold">🎖️ ค่ายตรวจเกรด & ความนิยมตัวละคร</h2>
+      <p class="mb-3 text-xs text-slate-500">⚠️ resale % = consensus ไกด์ · break-even = ประเมิน (~33฿/$)</p>
+      <div class="mb-4 rounded-xl border-l-4 border-slate-400 bg-slate-50 p-3 text-sm text-slate-700">🏛️ {L.GRADER_NOTE}</div>
+
+      <div class="grid gap-5 lg:grid-cols-2">
+        <div class="card p-4"><h3 class="mb-1 font-bold">ค่าเกรดถูกสุด รายค่าย (USD/ใบ)</h3><p class="mb-3 text-xs text-slate-500">CGC/BGS ถูกสุด · PSA แพง (Value ปิด) แต่ resale สูงสุด</p><div class="h-56"><canvas id="chart-gradersFee"></canvas></div></div>
+        <div class="card p-4"><h3 class="mb-1 font-bold">resale เทียบ PSA10 (%)</h3><p class="mb-3 text-xs text-slate-500">PSA = 100 (ฐาน) · CGC ~70% · ที่เหลือต่ำกว่า</p><div class="h-56"><canvas id="chart-gradersResale"></canvas></div></div>
+      </div>
+
+      <div class="card mt-5 p-4">
+        <h3 class="mb-2 font-bold">เทียบ 6 ค่าย — เลือกตามสถานการณ์</h3>
+        <div class="table-wrap"><table class="w-full text-sm">
+          <thead><tr class="text-left text-slate-500"><th class="p-2">ค่าย</th><th class="p-2">ถูกสุด</th><th class="p-2">resale</th><th class="p-2">เอเชีย</th><th class="p-2">เหมาะกับ</th></tr></thead>
+          <tbody>{L.GRADERS.map((g) => (<tr class="border-t border-[var(--border)]"><td class="p-2 font-medium">{g.co} {g.indep ? '🟢' : ''}</td><td class="p-2">${g.cheapest}</td><td class="p-2">{g.resale}%</td><td class="whitespace-nowrap p-2">{g.asia}</td><td class="p-2 text-slate-500">{g.fit}</td></tr>))}</tbody>
+        </table></div>
+        <p class="mt-2 text-xs text-slate-400">🟢 = independent (ไม่ใช่เครือ Collectors) · คนไทย: PSA/CGC มีศูนย์ HK รับ · BGS/SGC/TAG ต้อง route HK/SG</p>
+      </div>
+
+      <div class="card mt-5 p-4">
+        <h3 class="mb-1 font-bold">Break-even ต้นทุนรวม/ใบ (PSA / TAG / BGS)</h3>
+        <p class="mb-3 text-xs text-slate-500">PSA แพงสุดแต่ resale คุ้ม chase แพง · เกรดเฉพาะ Enchanted/Iconic + raw ≥ ~$50</p>
+        <div class="h-48"><canvas id="chart-breakeven"></canvas></div>
+        <div class="mt-2 grid gap-1 text-xs text-slate-500 sm:grid-cols-3">{L.BREAKEVEN.map((b) => (<div>• <b>{b.co}</b>: คุ้มเมื่อ {b.worth}</div>))}</div>
+      </div>
+
+      <h3 class="mt-8 mb-2 font-bold">⭐ ความนิยมตัวละคร = ตัวทำนายดีมานด์</h3>
+      <div class="grid gap-5 lg:grid-cols-2">
+        <div class="card p-4">
+          <h3 class="mb-1 font-bold">รายได้ franchise สะสม ($B, all-time)</h3>
+          <p class="mb-3 text-xs text-slate-500">⚠️ legacy เฟ้อ (สะสมหลายสิบปี) ไม่ใช่ความฮอตตอนนี้</p>
+          <div class="h-64"><canvas id="chart-franchise"></canvas></div>
+        </div>
+        <div class="card p-4">
+          <h3 class="mb-2 font-bold">ยอดขาย merch รายปี (สัญญาณดีสุด)</h3>
+          <div class="space-y-3">
+            {L.MERCH.map((m) => (
+              <div class="flex items-center justify-between rounded-lg bg-purple-50 p-3">
+                <span class="font-semibold">{m.name}</span><span class="text-xl font-extrabold text-purple-700">${m.usd}B/ปี</span>
+              </div>
+            ))}
+            <div class="rounded-lg bg-slate-50 p-3 text-sm text-slate-600">Disney รวม licensed <b>$63B (2024)</b> = #1 ผู้ให้ license โลก · 🌟 Stitch = ตัวขับ #1 ปี 2025–26 (หนัง→merch โต 10×)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt-5 p-4">
+        <h3 class="mb-2 font-bold">🎯 Asymmetric upside — ดังแต่การ์ดยังถูก + มี catalyst</h3>
+        <div class="table-wrap"><table class="w-full text-sm">
+          <thead><tr class="text-left text-slate-500"><th class="p-2">ตัวเลือก</th><th class="p-2">สัญญาณ/catalyst</th><th class="p-2">หมายเหตุ</th></tr></thead>
+          <tbody>{L.UPSIDE.map((u) => (<tr class="border-t border-[var(--border)]"><td class="p-2 font-medium">{u.pick}</td><td class="p-2">{u.signal}</td><td class="p-2 text-slate-500">{u.note}</td></tr>))}</tbody>
+        </table></div>
+        <p class="mt-2 text-xs text-slate-400">⛔ Star Wars/Marvel ไม่อยู่ใน Lorcana (มีแค่ Disney Animation + Pixar) · ดูคู่ <a href={noteLink('อันดับความนิยมตัวละคร Disney')} class="text-[var(--accent)] hover:underline">โน้ตอันดับตัวละคร →</a></p>
+      </div>
     </section>
 
     <!-- STRATEGY -->
