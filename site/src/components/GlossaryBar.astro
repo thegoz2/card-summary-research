@@ -1,0 +1,14 @@
+---
+// A row of tappable glossary chips. <GlossaryBar keys={["Iconic","rotation"]} />
+import { GLOSSARY } from '../lib/glossary';
+const { keys = [] } = Astro.props as { keys?: string[] };
+const items = keys.filter((k) => GLOSSARY[k]);
+---
+<div class="gloss-bar">
+  <span class="gloss-label">📖 ศัพท์ที่เจอบ่อย (แตะ/ชี้เพื่อดูคำแปล)</span>
+  <div class="gloss-chips">
+    {items.map((k) => (
+      <span class="term gloss-chip" tabindex="0" data-tip={GLOSSARY[k]}>{k}</span>
+    ))}
+  </div>
+</div>

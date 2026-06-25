@@ -1,0 +1,7 @@
+---
+// Inline jargon term with a hover/tap tooltip. <Term k="Iconic">Iconic</Term>
+import { GLOSSARY } from '../lib/glossary';
+const { k, tip } = Astro.props as { k?: string; tip?: string };
+const text = tip ?? (k ? GLOSSARY[k] : undefined);
+---
+{text ? <span class="term" tabindex="0" data-tip={text}><slot /></span> : <slot />}

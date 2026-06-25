@@ -246,3 +246,97 @@ body {
 .signal-green { color: var(--green); }
 .signal-yellow { color: var(--yellow); }
 .signal-red { color: var(--red); }
+
+/* ---------- glossary tooltip ---------- */
+.term {
+  border-bottom: 1px dashed #a78bfa;
+  cursor: help;
+  position: relative;
+  outline: none;
+}
+.term::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 0;
+  top: calc(100% + 6px);
+  width: max-content;
+  max-width: min(280px, 80vw);
+  background: #111827;
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.55;
+  padding: 0.55rem 0.7rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.15s, transform 0.15s;
+  z-index: 60;
+  white-space: normal;
+  text-align: left;
+  pointer-events: none;
+}
+.term:hover::after,
+.term:focus::after,
+.term:focus-visible::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ---------- glossary bar ---------- */
+.gloss-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #faf5ff;
+}
+.gloss-label { font-size: 0.8rem; font-weight: 600; color: #6b21a8; }
+.gloss-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.gloss-chip {
+  font-size: 0.8rem;
+  background: #fff;
+  border: 1px solid #e9d5ff;
+  border-bottom: 1px dashed #a78bfa;
+  border-radius: 9999px;
+  padding: 0.15rem 0.6rem;
+  color: #6d28d9;
+  font-weight: 500;
+}
+
+/* ---------- TL;DR box ---------- */
+.tldr {
+  border: 1px solid #bfdbfe;
+  background: linear-gradient(180deg, #eff6ff, #f8fafc);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+}
+.tldr-title { font-weight: 800; font-size: 1.02rem; margin-bottom: 0.5rem; }
+.tldr ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.45rem; }
+.tldr li {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  padding-left: 1.4rem;
+  position: relative;
+}
+.tldr li::before { content: '✅'; position: absolute; left: 0; font-size: 0.85rem; }
+
+/* ---------- section lead (plain-Thai one-liner under a heading) ---------- */
+.section-lead {
+  color: #475569;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  margin: -0.3rem 0 1rem;
+  max-width: 56ch;
+}
+.dash-h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}

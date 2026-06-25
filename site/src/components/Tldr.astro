@@ -1,0 +1,13 @@
+---
+// Plain-Thai "TL;DR" takeaway box. <Tldr items={["...", "..."]} />
+const { title = '⚡ สรุปสั้น อ่าน 30 วิ', items = [] } = Astro.props as {
+  title?: string;
+  items?: string[];
+};
+---
+<div class="tldr">
+  <div class="tldr-title">{title}</div>
+  <ul>
+    {items.map((i) => <li set:html={i} />)}
+  </ul>
+</div>

@@ -5,6 +5,8 @@ import { rawName, noteSlug } from '../lib/notes';
 import { url } from '../lib/url';
 import { parseLogTable } from '../lib/tracking';
 import * as M from '../data/market';
+import Tldr from '../components/Tldr.astro';
+import GlossaryBar from '../components/GlossaryBar.astro';
 
 const all = await getCollection('notes');
 const trackingNote = all.find((n) => rawName(n).includes('Tracking Sheet'));
@@ -171,6 +173,19 @@ const tone = (t: string) => (t === 'green' ? 'border-green-500 bg-green-50' : t 
       <a href={noteLink('Tracking Sheet')} class="text-sm text-[var(--accent)] hover:underline">เปิด Tracking Sheet →</a>
     </div>
 
+    <div class="mt-4">
+      <Tldr items={[
+        '<b>One Piece TCG = การ์ดอนิเมะที่ "ขาดตลาด"</b> (Bandai พิมพ์ไม่พอ) → กล่องซีลขึ้นราคาได้จริง (ต่างจาก Lorcana)',
+        'ปี 2025–26 ราคาพุ่งแรงแล้วเริ่มย่อ — ตอนนี้ <b>แยกขั้ว</b>: ของแข็ง (blue-chip) ขึ้น / ของรอง (TR/SP) ลง',
+        'มือใหม่: เริ่มที่ <b>กล่องซีลชุดดี</b> เป็นหลัก · ส่งเกรด PSA เฉพาะใบแพง · <b>เลี่ยง "จุ่ม"</b> (ผิดกฎหมายไทย)',
+        'จับตา <b>OP-17 (ก.ย. 2026)</b> วางขายพร้อมกันทั่วโลกครั้งแรก = บททดสอบดีมานด์จริง',
+        'ระวังฟองสบู่: คนในตลาด <b>~75% เป็นนักเก็งกำไร</b> ถ้าเทขายพร้อมกันราคาร่วงแรง',
+      ]} />
+      <div class="mt-3">
+        <GlossaryBar keys={['Manga Rare', 'MR', 'TR / SP', 'sealed', 'Carton', 'chase', 'graded', 'raw', 'PSA10', 'จุ่ม', 'pull rate', 'TCGKing', 'ฟองสบู่', 'แยกขั้ว', 'de minimis', 'flip', 'swing', 'hold', 'MSRP', 'arbitrage']} />
+      </div>
+    </div>
+
     <!-- Section nav -->
     <nav class="sticky top-14 z-20 -mx-4 mt-3 flex gap-2 overflow-x-auto border-y border-[var(--border)] bg-[var(--bg)]/90 px-4 py-2 backdrop-blur">
       {SECTIONS.map((s) => (
@@ -180,6 +195,8 @@ const tone = (t: string) => (t === 'green' ? 'border-green-500 bg-green-50' : t 
 
     <!-- ============ PULSE ============ -->
     <section id="pulse" class="scroll-mt-28 pt-6">
+      <h2 class="dash-h2 mb-1">📍 ภาพรวมตอนนี้</h2>
+      <p class="section-lead">สรุปเร็วๆ ว่าตลาด One Piece ตอนนี้แข็งหรืออ่อน และอยู่ช่วงไหนของวงจร</p>
       <div class="grid grid-cols-2 gap-3 lg:grid-cols-4">
         <div class="card p-4"><div class="text-xs text-slate-500">TCGKing Sealed</div><div class="mt-1 text-2xl font-extrabold signal-green">{sealed}</div><div class="text-xs text-slate-400">+29.4% YTD</div></div>
         <div class="card p-4"><div class="text-xs text-slate-500">Treasure Rare</div><div class="mt-1 text-2xl font-extrabold signal-red">{tr}</div><div class="text-xs text-slate-400">−19.4% YTD</div></div>
@@ -204,7 +221,8 @@ const tone = (t: string) => (t === 'green' ? 'border-green-500 bg-green-50' : t 
 
     <!-- ============ RISK ============ -->
     <section id="risk" class="scroll-mt-28 pt-10">
-      <h2 class="mb-4 text-xl font-bold">🚦 ดัชนี & สัญญาณความเสี่ยง</h2>
+      <h2 class="dash-h2">🚦 ดัชนี & สัญญาณความเสี่ยง</h2>
+      <p class="section-lead">ดัชนีราคาตอนนี้ + สัญญาณเตือนฟองสบู่ 8 ตัว + อนาคต 3 แบบ (ดี / กลาง / แย่)</p>
 
       <div class="grid gap-5 lg:grid-cols-2">
         <div class="card p-4">
@@ -249,7 +267,8 @@ const tone = (t: string) => (t === 'green' ? 'border-green-500 bg-green-50' : t 
 
     <!-- ============ PRICE ============ -->
     <section id="price" class="scroll-mt-28 pt-10">
-      <h2 class="mb-4 text-xl font-bold">💰 ราคา Booster Box</h2>
+      <h2 class="dash-h2">💰 ราคากล่อง (Booster Box)</h2>
+      <p class="section-lead">ราคากล่องแต่ละชุด เทียบไทย/ญี่ปุ่น/สหรัฐฯ และราคาหิ้วรายประเทศ</p>
       <div class="grid gap-5 lg:grid-cols-2">
         <div class="card p-4"><h3 class="mb-1 font-bold">เทียบตลาด TH / JP / US (บาท)</h3><p class="mb-3 text-xs text-slate-500">OP-13 blue-chip ต่างกันถึง {usSasomRatio}× (US vs SASOM)</p><div class="h-72"><canvas id="chart-box"></canvas></div></div>
         <div class="card p-4"><h3 class="mb-1 font-bold">ราคาหิ้ว OP-16 รายประเทศ (บาท)</h3><p class="mb-3 text-xs text-slate-500">landed/กล่อง เทียบเส้น SASOM 4,300 & รีเทล 7,500</p><div class="h-72"><canvas id="chart-carry"></canvas></div></div>
@@ -260,7 +279,8 @@ const tone = (t: string) => (t === 'green' ? 'border-green-500 bg-green-50' : t 
 
     <!-- ============ GRADE & CARDS ============ -->
     <section id="grade" class="scroll-mt-28 pt-10">
-      <h2 class="mb-4 text-xl font-bold">🏆 เกรด & การ์ดเดี่ยว</h2>
+      <h2 class="dash-h2">🏆 เกรด & การ์ดเดี่ยว</h2>
+      <p class="section-lead">การ์ดใบไหนแพง · เปิดซองเจอยากแค่ไหน · และค่าส่งตรวจเกรด</p>
       <div class="grid gap-5 lg:grid-cols-2">
         <div class="card p-4"><h3 class="mb-1 font-bold">การ์ด Manga Rare: RAW vs GRADED (บาท)</h3><p class="mb-3 text-xs text-slate-500">⚠️ ราคาชุมชน card2price · มาตราส่วน log</p><div class="h-72"><canvas id="chart-singles"></canvas></div></div>
         <div class="card p-4"><h3 class="mb-1 font-bold">Pull Rate ต่อ rarity (1 ใน N ซอง)</h3><p class="mb-3 text-xs text-slate-500">⚠️ ตัวเลขชุมชน · MR หายากสุด ~1 ใน 500–1,500 ซอง</p><div class="h-72"><canvas id="chart-pull"></canvas></div></div>
@@ -279,7 +299,8 @@ const tone = (t: string) => (t === 'green' ? 'border-green-500 bg-green-50' : t 
 
     <!-- ============ COST ============ -->
     <section id="cost" class="scroll-mt-28 pt-10">
-      <h2 class="mb-4 text-xl font-bold">🚚 ต้นทุน & โลจิสติกส์</h2>
+      <h2 class="dash-h2">🚚 ต้นทุน & การขนส่ง</h2>
+      <p class="section-lead">ค่าส่งของ ค่าธรรมเนียมขาย และกำไร/ขาดทุนถ้านำเข้ามาขายในไทย</p>
       <div class="grid gap-5 lg:grid-cols-2">
         <div class="card p-4"><h3 class="mb-1 font-bold">ค่าส่ง DHL ตามน้ำหนัก (บาท)</h3><p class="mb-3 text-xs text-slate-500">list 2025 ยังไม่รวม fuel + VAT · US ≈ 2.5× HK</p><div class="h-64"><canvas id="chart-dhl"></canvas></div></div>
         <div class="card p-4"><h3 class="mb-1 font-bold">ค่าธรรมเนียมแพลตฟอร์มขาย (% all-in)</h3><p class="mb-3 text-xs text-slate-500">TikTok ถูกสุดในประเทศ · eBay แพงสุดฝั่งส่งออก</p><div class="h-72"><canvas id="chart-fees"></canvas></div></div>
@@ -293,7 +314,8 @@ const tone = (t: string) => (t === 'green' ? 'border-green-500 bg-green-50' : t 
 
     <!-- ============ STRATEGY ============ -->
     <section id="strategy" class="scroll-mt-28 pt-10">
-      <h2 class="mb-4 text-xl font-bold">🎯 กลยุทธ์ & การจัดพอร์ต</h2>
+      <h2 class="dash-h2">🎯 กลยุทธ์ & การแบ่งเงิน</h2>
+      <p class="section-lead">เล่นแนวไหนดี · แบ่งเงินยังไง · และทำตามงบเท่าไหร่</p>
 
       <!-- 3 strategies table -->
       <div class="card p-4">
@@ -324,7 +346,8 @@ const tone = (t: string) => (t === 'green' ? 'border-green-500 bg-green-50' : t 
 
     <!-- ============ INVEST ============ -->
     <section id="invest" class="scroll-mt-28 pt-10">
-      <h2 class="mb-4 text-xl font-bold">📊 เทียบกับการลงทุนอื่น</h2>
+      <h2 class="dash-h2">📊 เทียบกับการลงทุนอื่น</h2>
+      <p class="section-lead">การ์ดเทียบกับหุ้น / ทอง / คริปโต — คุ้มและเสี่ยงแค่ไหน</p>
       <div class="card p-4">
         <div class="table-wrap"><table class="w-full text-sm">
           <thead><tr class="text-left text-slate-500"><th class="p-2"></th><th class="p-2">🃏 TCG</th><th class="p-2">📈 หุ้น</th><th class="p-2">🥇 ทอง</th><th class="p-2">₿ คริปโต</th></tr></thead>
@@ -352,8 +375,9 @@ const tone = (t: string) => (t === 'green' ? 'border-green-500 bg-green-50' : t 
 
     <!-- ============ COMPARE OTHER MARKETS ============ -->
     <section id="compare" class="scroll-mt-28 pt-10">
-      <h2 class="mb-1 text-xl font-bold">🃏 เทียบตลาดการ์ดอื่น (บริบทโลก)</h2>
-      <p class="mb-4 text-xs text-slate-500">OP TCG อายุ 4 ปี vs Pokémon/MTG 30+ ปี · ⚠️ ตัวเลขตลาดรวมประเมินยาก อ่านเป็นช่วง</p>
+      <h2 class="dash-h2">🃏 เทียบตลาดการ์ดอื่น (บริบทโลก)</h2>
+      <p class="section-lead">วาง One Piece เทียบตลาดการ์ดอื่นทั้งโลก (Pokémon / MTG / การ์ดกีฬา / Lorcana)</p>
+      <p class="mb-4 text-sm text-slate-400">One Piece อายุแค่ 4 ปี เทียบ Pokémon/MTG 30+ ปี · ⚠️ ตัวเลขตลาดรวมประเมินยาก อ่านเป็นช่วง</p>
 
       <div class="grid gap-5 lg:grid-cols-2">
         <div class="card p-4"><h3 class="mb-1 font-bold">ขนาดตลาดต่อปี (พันล้าน USD)</h3><p class="mb-3 text-xs text-slate-500">OP เดี่ยว ~$170M ยังเล็กกว่า Pokémon/MTG หลายเท่า</p><div class="h-64"><canvas id="chart-marketsize"></canvas></div></div>
@@ -386,7 +410,8 @@ const tone = (t: string) => (t === 'green' ? 'border-green-500 bg-green-50' : t 
 
     <!-- ============ FORECAST ============ -->
     <section id="forecast" class="scroll-mt-28 pt-10">
-      <h2 class="mb-4 text-xl font-bold">🔮 พยากรณ์ & ไทม์ไลน์</h2>
+      <h2 class="dash-h2">🔮 พยากรณ์ & ไทม์ไลน์</h2>
+      <p class="section-lead">คาดการณ์ราคาปี 2026 และไทม์ไลน์การออกชุดต่างๆ</p>
       <div class="grid gap-5 lg:grid-cols-2">
         <div class="card p-4"><h3 class="mb-1 font-bold">ช่วงคาดการณ์ราคา 2026 (%)</h3><p class="mb-3 text-xs text-slate-500">⚠️ ฉากทัศน์ Base — ตัวเลขเป็นช่วงประเมิน</p><div class="h-56"><canvas id="chart-forecast"></canvas></div></div>
         <div class="card p-4">
