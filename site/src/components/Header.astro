@@ -21,9 +21,15 @@ const isActive = (p: string) =>
       <a
         href={url('/dashboard/')}
         class:list={[
-          'rounded-lg px-3 py-1.5 font-medium transition',
-          isActive('/dashboard') ? 'bg-[var(--accent)] text-white' : 'text-slate-600 hover:bg-slate-100',
-        ]}>📊 Dashboard</a>
+          'rounded-lg px-2.5 py-1.5 font-medium transition',
+          path === '/dashboard' || path === '/dashboard/' ? 'bg-[var(--accent)] text-white' : 'text-slate-600 hover:bg-slate-100',
+        ]}>🏴‍☠️ OP</a>
+      <a
+        href={url('/dashboard/lorcana/')}
+        class:list={[
+          'rounded-lg px-2.5 py-1.5 font-medium transition',
+          path.startsWith('/dashboard/lorcana') ? 'bg-[var(--accent)] text-white' : 'text-slate-600 hover:bg-slate-100',
+        ]}>🏰 Lorcana</a>
       <a
         href={url('/notes/')}
         class:list={[

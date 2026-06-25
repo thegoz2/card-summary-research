@@ -78,10 +78,11 @@ const lastUpdatedStr = lastUpdated ? new Date(lastUpdated).toISOString().slice(0
             <div class="flex items-center gap-2 text-lg font-bold">🏰 Disney Lorcana</div>
             <span class="chip">{projCount('lorcana')} โน้ต</span>
           </div>
-          <p class="mt-2 text-sm text-slate-500">IP Disney/Pixar · สะสมระยะยาว · anti-scarcity (ไม่มี Reserved List)</p>
+          <p class="mt-2 text-sm text-slate-500">IP Disney/Pixar · สะสมระยะยาว · anti-scarcity (ไม่มี Reserved List) · มี Dashboard เต็ม</p>
           <div class="mt-4 flex flex-wrap gap-2">
-            <a href={overviewLink('lorcana')} class="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90">📖 ภาพรวม</a>
-            <button data-jump="lorcana" class="rounded-lg border border-[var(--border)] bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">🔎 ดูโน้ตทั้งหมด</button>
+            <a href={url('/dashboard/lorcana/')} class="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90">📊 Dashboard</a>
+            <a href={overviewLink('lorcana')} class="rounded-lg border border-[var(--border)] bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">📖 ภาพรวม</a>
+            <button data-jump="lorcana" class="rounded-lg border border-[var(--border)] bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">🔎 โน้ต</button>
           </div>
         </div>
       </div>

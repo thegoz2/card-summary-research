@@ -1,0 +1,318 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { rawName, noteSlug } from '../../lib/notes';
+import { url } from '../../lib/url';
+import * as L from '../../data/lorcana';
+
+const all = await getCollection('notes');
+const noteLink = (titlePart: string) => {
+  const n = all.find((x) => rawName(x).includes(titlePart));
+  return url(n ? `/notes/${noteSlug(n)}/` : '/notes/');
+};
+const fmt = (n: number) => n.toLocaleString('en-US');
+
+const SECTIONS = [
+  { id: 'pulse', label: '📍 ภาพรวม' },
+  { id: 'risk', label: '🚦 สัญญาณ' },
+  { id: 'price', label: '💰 ราคา' },
+  { id: 'cards', label: '🏆 การ์ด & Rarity' },
+  { id: 'cost', label: '🚚 ต้นทุน' },
+  { id: 'strategy', label: '🎯 กลยุทธ์' },
+  { id: 'versus', label: '⚖️ เทียบ OP' },
+];
+
+const green = '#16a34a', red = '#dc2626', amber = '#f59e0b', blue = '#3b82f6', purple = '#7c3aed';
+const base = { responsive: true, maintainAspectRatio: false };
+const noLegend = { legend: { display: false } };
+
+const charts: Record<string, unknown> = {
+  rank: {
+    type: 'line',
+    data: { labels: L.RANK.map((r) => r.t), datasets: [{ data: L.RANK.map((r) => r.rank), borderColor: red, backgroundColor: red, tension: 0.2 }] },
+    options: { ...base, plugins: noLegend, scales: { y: { reverse: true, min: 1, max: 7, ticks: { stepSize: 1 }, title: { display: true, text: 'อันดับ TCG (น้อย = ดี)' } } } },
+  },
+  forecast: {
+    type: 'bar',
+    data: { labels: L.FORECAST.map((f) => f.period), datasets: [{ data: L.FORECAST.map((f) => f.range), backgroundColor: [green, amber, red], borderRadius: 5 }] },
+    options: { ...base, indexAxis: 'y', plugins: noLegend, scales: { x: { title: { display: true, text: 'chase % 2026–28' } } } },
+  },
+  scenarioProb: {
+    type: 'doughnut',
+    data: { labels: L.SCENARIOS.map((s) => s.name), datasets: [{ data: L.SCENARIOS.map((s) => s.prob), backgroundColor: [green, amber, red] }] },
+    options: { ...base, plugins: { legend: { position: 'bottom' } } },
+  },
+  boxarc: {
+    type: 'line',
+    data: { labels: L.BOX_ARC.map((p) => p.t), datasets: [{ label: 'First Chapter box (USD)', data: L.BOX_ARC.map((p) => p.usd), borderColor: purple, backgroundColor: purple, tension: 0.3 }] },
+    options: { ...base, plugins: noLegend, scales: { y: { title: { display: true, text: 'USD/กล่อง' } } } },
+  },
+  regionbox: {
+    type: 'bar',
+    data: { labels: L.REGION_BOX.map((r) => r.region), datasets: [{ data: L.REGION_BOX.map((r) => r.usd), backgroundColor: L.REGION_BOX.map((r) => (r.region.includes('ไทย') ? red : blue)), borderRadius: 5 }] },
+    options: { ...base, indexAxis: 'y', plugins: noLegend, scales: { x: { title: { display: true, text: 'USD/กล่อง (in-print)' } } } },
+  },
+  setdiscount: {
+    type: 'bar',
+    data: { labels: L.SET_DISCOUNT.map((s) => s.set), datasets: [{ data: L.SET_DISCOUNT.map((s) => s.pct), backgroundColor: green, borderRadius: 5 }] },
+    options: { ...base, indexAxis: 'y', plugins: noLegend, scales: { x: { title: { display: true, text: '% ต่ำกว่า MSRP ($143.99)' } } } },
+  },
+  singles: {
+    type: 'bar',
+    data: { labels: L.SINGLES.map((s) => s.card), datasets: [
+      { label: 'RAW', data: L.SINGLES.map((s) => s.raw), backgroundColor: '#94a3b8', borderRadius: 4 },
+      { label: 'GRADED (PSA10 sold)', data: L.SINGLES.map((s) => s.graded), backgroundColor: purple, borderRadius: 4 },
+    ] },
+    options: { ...base, indexAxis: 'y', plugins: { legend: { position: 'bottom' } }, scales: { x: { type: 'logarithmic', title: { display: true, text: 'USD (log) · ใช้ราคา sold ไม่ใช่ ask' } } } },
+  },
+  rarity: {
+    type: 'bar',
+    data: { labels: L.RARITY.map((r) => r.tier), datasets: [{ data: L.RARITY.map((r) => r.oneIn), backgroundColor: [blue, '#0ea5e9', amber, purple, red], borderRadius: 5 }] },
+    options: { ...base, plugins: noLegend, scales: { y: { type: 'logarithmic', title: { display: true, text: '1 ใน N ซอง (log)' } } } },
+  },
+  pullset: {
+    type: 'bar',
+    data: { labels: L.PULL_SET.map((p) => p.set), datasets: [{ data: L.PULL_SET.map((p) => p.pct), backgroundColor: purple, borderRadius: 5 }] },
+    options: { ...base, plugins: noLegend, scales: { y: { title: { display: true, text: 'Enchanted %/ซอง' } } } },
+  },
+  grading: {
+    type: 'bar',
+    data: { labels: L.GRADING.map((g) => g.tier), datasets: [{ data: L.GRADING.map((g) => g.usd), backgroundColor: L.GRADING.map((g) => (g.co === 'PSA' ? red : blue)), borderRadius: 5 }] },
+    options: { ...base, indexAxis: 'y', plugins: noLegend, scales: { x: { title: { display: true, text: 'USD/ใบ · แดง=PSA น้ำเงิน=CGC' } } } },
+  },
+  cardkub: {
+    type: 'bar',
+    data: { labels: L.CARDKUB.map((c) => c.tier), datasets: [{ data: L.CARDKUB.map((c) => c.baht), backgroundColor: '#8b5cf6', borderRadius: 5 }] },
+    options: { ...base, plugins: noLegend, scales: { y: { title: { display: true, text: 'บาท/ใบ (PSA proxy)' } } } },
+  },
+  landed: {
+    type: 'bar',
+    data: { labels: L.LANDED.map((l) => l.scenario), datasets: [{ data: L.LANDED.map((l) => l.baht), backgroundColor: L.LANDED.map((l) => (l.ok ? green : red)), borderRadius: 5 }] },
+    options: { ...base, indexAxis: 'y', plugins: noLegend, scales: { x: { title: { display: true, text: 'บาท/กล่อง (local ~4,550)' } } } },
+  },
+  fees: {
+    type: 'bar',
+    data: { labels: L.FEES.map((f) => f.platform), datasets: [{ data: L.FEES.map((f) => f.pct), backgroundColor: L.FEES.map((f) => (f.scope === 'ในประเทศ' ? blue : amber)), borderRadius: 5 }] },
+    options: { ...base, indexAxis: 'y', plugins: noLegend, scales: { x: { title: { display: true, text: '% all-in · น้ำเงิน=ในประเทศ ส้ม=ส่งออก' } } } },
+  },
+  portfolio: {
+    type: 'doughnut',
+    data: { labels: L.PORTFOLIO.map((b) => b.name), datasets: [{ data: L.PORTFOLIO.map((b) => b.pct), backgroundColor: L.PORTFOLIO.map((b) => b.color) }] },
+    options: { ...base, plugins: { legend: { position: 'bottom' } } },
+  },
+};
+const chartsJson = JSON.stringify(charts).replaceAll('<', '\\u003c');
+
+const tone = (t: string) => (t === 'green' ? 'border-green-500 bg-green-50' : t === 'yellow' ? 'border-amber-500 bg-amber-50' : 'border-red-500 bg-red-50');
+const dot = (s: string) => (s === 'green' ? '🟢' : s === 'yellow' ? '🟡' : '🔴');
+const topIconic = L.SINGLES[0];
+---
+
+<Base title="Dashboard Lorcana">
+  <main class="mx-auto max-w-6xl px-4 py-6">
+    <div class="flex flex-wrap items-end justify-between gap-2">
+      <div>
+        <h1 class="text-2xl font-extrabold sm:text-3xl">🏰 Dashboard วิเคราะห์ตลาด Disney Lorcana</h1>
+        <p class="mt-1 text-xs text-slate-500">ข้อมูล ณ {L.META.asOf} · {L.META.fx}</p>
+      </div>
+      <a href={url('/dashboard/')} class="text-sm text-[var(--accent)] hover:underline">🏴‍☠️ ดู Dashboard One Piece →</a>
+    </div>
+
+    <div class="mt-3 rounded-xl border-l-4 border-purple-500 bg-purple-50 p-3 text-sm text-slate-700">
+      💡 <span class="font-semibold">แก่นต่างจาก OP:</span> Ravensburger จงใจ <b>ต้านความหายาก</b> (ไม่มี Reserved List, พิมพ์ตามดีมานด์) →
+      <b>sealed เป็น store of value ที่อ่อน</b> · เก็งกำไรได้เฉพาะของ scarcity จริง (Enchanted/Iconic ชุดต้น + promo)
+    </div>
+
+    <nav class="sticky top-14 z-20 -mx-4 mt-3 flex gap-2 overflow-x-auto border-y border-[var(--border)] bg-[var(--bg)]/90 px-4 py-2 backdrop-blur">
+      {SECTIONS.map((s) => <a href={`#${s.id}`} class="chip shrink-0 hover:bg-slate-200">{s.label}</a>)}
+    </nav>
+
+    <!-- PULSE -->
+    <section id="pulse" class="scroll-mt-28 pt-6">
+      <div class="grid grid-cols-2 gap-3 lg:grid-cols-4">
+        <div class="card p-4"><div class="text-xs text-slate-500">อันดับ TCG</div><div class="mt-1 text-2xl font-extrabold signal-red">{L.META.rankNow}</div><div class="text-xs text-slate-400">ร่วงจาก #3 (หลัง OP)</div></div>
+        <div class="card p-4"><div class="text-xs text-slate-500">สัญญาณ bearish</div><div class="mt-1 text-2xl font-extrabold signal-red">{L.META.bearishSignals}/{L.META.totalSignals}</div><div class="text-xs text-slate-400">เอียงหมี</div></div>
+        <div class="card p-4"><div class="text-xs text-slate-500">สภาพตลาด</div><div class="mt-1 text-base font-bold text-amber-600">แยกขั้ว</div><div class="text-xs text-slate-400">chase ขึ้น · sealed ลง</div></div>
+        <div class="card p-4"><div class="text-xs text-slate-500">Iconic แพงสุด (raw)</div><div class="mt-1 text-2xl font-extrabold">${fmt(topIconic.raw)}</div><div class="text-xs text-slate-400">Buzz ⚠️ ฟองสบู่</div></div>
+      </div>
+
+      <div class="card mt-4 flex items-stretch overflow-x-auto p-2">
+        {L.PHASE.map((c, i) => (
+          <>
+            <div class:list={['min-w-[120px] flex-1 rounded-lg px-3 py-2 text-center', c.active ? 'bg-purple-600 text-white' : 'text-slate-500']}>
+              <div class="text-sm font-bold">{c.phase}</div><div class="text-xs opacity-80">{c.period}</div>
+            </div>
+            {i < L.PHASE.length - 1 && <div class="flex items-center text-slate-300">→</div>}
+          </>
+        ))}
+      </div>
+
+      <div class="card mt-4 p-4">
+        <h3 class="mb-1 font-bold">อันดับ TCG ร่วง (#3 → #6)</h3>
+        <p class="mb-3 text-xs text-slate-500">ตลาด TCG รวมโต +40% ปี 2025 แต่ Lorcana ร่วง — underperform ทั้งหมวด</p>
+        <div class="h-56"><canvas id="chart-rank"></canvas></div>
+      </div>
+    </section>
+
+    <!-- RISK -->
+    <section id="risk" class="scroll-mt-28 pt-10">
+      <h2 class="mb-4 text-xl font-bold">🚦 สัญญาณเตือน & ฉากทัศน์</h2>
+      <div class="mb-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {L.SIGNALS.map((b) => (
+          <div class="card p-3"><div class="flex items-start gap-2"><span class="text-lg leading-none">{dot(b.status)}</span><div><div class="text-sm font-semibold leading-snug">{b.name}</div><div class="mt-1 text-xs text-slate-500">{b.detail}</div></div></div></div>
+        ))}
+      </div>
+
+      <div class="grid gap-3 lg:grid-cols-3">
+        {L.SCENARIOS.map((s) => (
+          <div class:list={['rounded-xl border-l-4 p-4', tone(s.tone)]}>
+            <div class="font-bold">{s.emoji} {s.name}</div>
+            <div class="mt-1 text-xs font-semibold text-slate-600">โอกาส ~{s.prob}% · chase {s.chase}</div>
+            <div class="mt-2 text-sm font-medium">{s.outcome}</div>
+            <div class="mt-2 text-xs text-slate-500"><span class="font-semibold">ทริกเกอร์:</span> {s.trigger}</div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-5 grid gap-5 lg:grid-cols-2">
+        <div class="card p-4"><h3 class="mb-1 font-bold">โอกาสแต่ละฉากทัศน์</h3><p class="mb-3 text-xs text-slate-500">⚠️ ประเมินเชิงคุณภาพ</p><div class="h-56"><canvas id="chart-scenarioProb"></canvas></div></div>
+        <div class="card p-4"><h3 class="mb-1 font-bold">ช่วงราคา chase 2026–28 (%)</h3><p class="mb-3 text-xs text-slate-500">Base = most likely (+10–30%)</p><div class="h-56"><canvas id="chart-forecast"></canvas></div></div>
+      </div>
+      <p class="mt-2 text-xs text-slate-400">เกณฑ์: 🔴 ≥4 bearish + "Dropping report" โผล่ → ลดน้ำหนัก/ขาย flip เหลือ hold-tier · <a href={noteLink('Tracking Sheet — สัญญาณเตือนฟองสบู่ Lorcana')} class="text-[var(--accent)] hover:underline">Tracking Sheet →</a></p>
+    </section>
+
+    <!-- PRICE -->
+    <section id="price" class="scroll-mt-28 pt-10">
+      <h2 class="mb-4 text-xl font-bold">💰 ราคา Box & ตลาด</h2>
+      <div class="grid gap-5 lg:grid-cols-2">
+        <div class="card p-4"><h3 class="mb-1 font-bold">First Chapter sealed box — วงจรราคา (USD)</h3><p class="mb-3 text-xs text-slate-500">$144 → พีค $402 → reprint ทุบ $155 → ฟื้น ~$375 (ชุดเดียวที่ยืนเหนือ MSRP)</p><div class="h-64"><canvas id="chart-boxarc"></canvas></div></div>
+        <div class="card p-4"><h3 class="mb-1 font-bold">ราคา box ถูกสุดต่อภูมิภาค (in-print)</h3><p class="mb-3 text-xs text-slate-500">EU ex-VAT ถูกสุด · ชุดใหม่ US ยืนเหนือ MSRP</p><div class="h-64"><canvas id="chart-regionbox"></canvas></div></div>
+      </div>
+      <div class="card mt-5 p-4">
+        <h3 class="mb-1 font-bold">ราคา street สหรัฐฯ ต่ำกว่า MSRP (%)</h3>
+        <p class="mb-3 text-xs text-slate-500">ชุด in-print เกือบทุกชุดต่ำกว่า MSRP $143.99 — รอ 2–4 สัปดาห์หลังวาง ได้ถูกสุด</p>
+        <div class="h-56"><canvas id="chart-setdiscount"></canvas></div>
+      </div>
+    </section>
+
+    <!-- CARDS & RARITY -->
+    <section id="cards" class="scroll-mt-28 pt-10">
+      <h2 class="mb-4 text-xl font-bold">🏆 การ์ดเดี่ยว & Rarity</h2>
+      <div class="grid gap-5 lg:grid-cols-2">
+        <div class="card p-4"><h3 class="mb-1 font-bold">Chase: RAW vs GRADED (USD)</h3><p class="mb-3 text-xs text-slate-500">log scale · Iconic (Buzz/Mickey) นำ · graded = sold ไม่ใช่ ask</p><div class="h-72"><canvas id="chart-singles"></canvas></div></div>
+        <div class="card p-4"><h3 class="mb-1 font-bold">Rarity ladder (1 ใน N ซอง)</h3><p class="mb-3 text-xs text-slate-500">⚠️ ตัวเลขชุมชน · Iconic หายากสุด ~1/เคส</p><div class="h-72"><canvas id="chart-rarity"></canvas></div></div>
+        <div class="card p-4"><h3 class="mb-1 font-bold">อัตราดรอป Enchanted ต่อชุด (%/ซอง)</h3><p class="mb-3 text-xs text-slate-500">จาก box-opening จริง · ชุดใหม่ใจดีขึ้น</p><div class="h-56"><canvas id="chart-pullset"></canvas></div></div>
+        <div class="card p-4">
+          <h3 class="mb-1 font-bold">💎 ของที่ scarcity จริง (ถือได้) vs ยืดได้ (เลี่ยง)</h3>
+          <div class="mt-2 grid grid-cols-2 gap-3 text-sm">
+            <div><div class="mb-1 font-semibold text-green-700">✅ reprint-proof</div><ul class="list-disc space-y-1 pl-4 text-slate-600">{L.SCARCITY.capped.map((x) => <li>{x}</li>)}</ul></div>
+            <div><div class="mb-1 font-semibold text-red-700">❌ supply ยืดได้</div><ul class="list-disc space-y-1 pl-4 text-slate-600">{L.SCARCITY.elastic.map((x) => <li>{x}</li>)}</ul></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt-5 p-4">
+        <h3 class="mb-2 font-bold">🎯 Watchlist ราคาเป้า BUY / SELL (USD raw)</h3>
+        <div class="table-wrap"><table class="w-full text-sm">
+          <thead><tr class="text-left text-slate-500"><th class="p-2">การ์ด</th><th class="p-2">ตอนนี้</th><th class="p-2 text-green-600">ซื้อ ≤</th><th class="p-2 text-red-600">ขาย ≥</th><th class="p-2">บัคเก็ต</th></tr></thead>
+          <tbody>{L.WATCH.map((w) => (<tr class="border-t border-[var(--border)]"><td class="p-2 font-medium">{w.card}</td><td class="p-2">${fmt(w.cur)}</td><td class="p-2 text-green-600">${fmt(w.buy)}</td><td class="p-2 text-red-600">${fmt(w.sell)}</td><td class="whitespace-nowrap p-2">{w.bucket}</td></tr>))}</tbody>
+        </table></div>
+        <p class="mt-2 text-xs text-slate-400">⚠️ ใช้ราคา sold เทียบ · Iconic ขยับ 100%+/เดือนได้ · ของ ask มักสูงกว่า sold 2–3× (เช่น Mickey PSA10 ask $25k vs sold ~$8.1k)</p>
+      </div>
+    </section>
+
+    <!-- COST -->
+    <section id="cost" class="scroll-mt-28 pt-10">
+      <h2 class="mb-4 text-xl font-bold">🚚 ต้นทุน & เกรด</h2>
+      <div class="grid gap-5 lg:grid-cols-2">
+        <div class="card p-4"><h3 class="mb-1 font-bold">ค่าเกรด PSA vs CGC (USD/ใบ)</h3><p class="mb-3 text-xs text-slate-500">{L.GRADING_NOTE} · PSA Value tiers ปิดชั่วคราว (backlog)</p><div class="h-64"><canvas id="chart-grading"></canvas></div></div>
+        <div class="card p-4"><h3 class="mb-1 font-bold">ส่งเกรดผ่าน CardKub (บาท/ใบ)</h3><p class="mb-3 text-xs text-slate-500">PSA proxy · Lorcana ไม่อยู่ในลิสต์ → CGC ต้อง ship เองฮ่องกง</p><div class="h-56"><canvas id="chart-cardkub"></canvas></div></div>
+        <div class="card p-4"><h3 class="mb-1 font-bold">นำเข้ามาขายในไทย — ต้นทุน/กล่อง (บาท)</h3><p class="mb-3 text-xs text-slate-500">⚠️ อากร 10–20% ยังไม่ยืนยัน · เกือบทุกทางแพงกว่าซื้อในไทย</p><div class="h-64"><canvas id="chart-landed"></canvas></div></div>
+        <div class="card p-4"><h3 class="mb-1 font-bold">ค่าธรรมเนียมขาย (% all-in)</h3><p class="mb-3 text-xs text-slate-500">FB ไทยฟรี · eBay แพงสุด (~18%) แต่เป็นช่องส่งออกหลัก</p><div class="h-64"><canvas id="chart-fees"></canvas></div></div>
+      </div>
+      <div class="mt-3 rounded-lg bg-red-50 p-3 text-sm text-red-800">⚖️ <b>"ไพ่" = สินค้าควบคุมสรรพสามิตไทย</b> — นำเข้า/ขายต้องมีใบอนุญาต (พ.ร.บ.สรรพสามิต 2560) · เคยมีเคสยึด 33,800 สำรับ ปรับ 7.91 ล้านบาท · กระทบทั้งนำเข้า+ส่งออก TCG</div>
+    </section>
+
+    <!-- STRATEGY -->
+    <section id="strategy" class="scroll-mt-28 pt-10">
+      <h2 class="mb-4 text-xl font-bold">🎯 กลยุทธ์ & การจัดพอร์ต</h2>
+      <div class="card p-4">
+        <h3 class="mb-2 font-bold">flip / swing / hold</h3>
+        <div class="table-wrap"><table class="w-full text-sm">
+          <thead><tr class="text-left text-slate-500"><th class="p-2">แนว</th><th class="p-2">อะไร</th><th class="p-2">ผลตอบแทน</th><th class="p-2">กฎ</th></tr></thead>
+          <tbody>{L.STRATEGIES.map((s) => (<tr class="border-t border-[var(--border)]"><td class="p-2 font-medium">{s.type}</td><td class="p-2 text-slate-500">{s.what}</td><td class="p-2">{s.ret}</td><td class="p-2 text-slate-500">{s.rule}</td></tr>))}</tbody>
+        </table></div>
+        <p class="mt-2 text-sm font-semibold text-slate-700">💡 {L.ROI_HURDLE}</p>
+      </div>
+
+      <div class="mt-5 grid gap-5 lg:grid-cols-2">
+        <div class="card p-4"><h3 class="mb-1 font-bold">จัดพอร์ต (งบ &gt; 100k)</h3><p class="mb-3 text-xs text-slate-500">เน้น graded chase + เงินสดรอ valley</p><div class="h-56"><canvas id="chart-portfolio"></canvas></div></div>
+        <div class="card p-4">
+          <h3 class="mb-2 font-bold">⏱️ Rotation (Core Constructed)</h3>
+          <div class="space-y-2 text-sm">{L.ROTATION.map((r) => (<div class="flex gap-2"><span class="font-bold text-purple-600">{r.round}</span><span class="text-slate-500">{r.date} — {r.out}</span></div>))}</div>
+          <p class="mt-2 text-xs text-slate-400">rotation = หน้าต่าง BUY (ของหมุนออกราคาตก) · Infinity format ไม่หมุน = พยุงราคาหลัง rotation</p>
+        </div>
+      </div>
+
+      <h3 class="mt-8 mb-3 font-bold">แผนตามงบประมาณ</h3>
+      <div class="grid gap-3 lg:grid-cols-3">
+        {L.BUDGET.map((b) => (
+          <div class="card p-4">
+            <div class="font-bold">{b.emoji} {b.tier}</div>
+            <ul class="mt-2 list-disc space-y-1 pl-4 text-sm text-slate-600">{b.todo.map((t) => <li>{t}</li>)}</ul>
+            <div class="mt-2 text-xs text-red-600">❌ เลี่ยง: {b.avoid}</div>
+          </div>
+        ))}
+      </div>
+
+      <div class="card mt-5 p-4">
+        <h3 class="mb-2 font-bold">⚠️ ทำไมคนเจ๊ง</h3>
+        <ul class="space-y-1.5 text-sm text-slate-600">{L.WHY_LOSE.map((w) => (<li>• <b>{w.mode}</b> — {w.num}</li>))}</ul>
+      </div>
+    </section>
+
+    <!-- VERSUS -->
+    <section id="versus" class="scroll-mt-28 pt-10">
+      <h2 class="mb-4 text-xl font-bold">⚖️ Lorcana vs One Piece TCG</h2>
+      <div class="card p-4">
+        <div class="table-wrap"><table class="w-full text-sm">
+          <thead><tr class="text-left text-slate-500"><th class="p-2">มิติ</th><th class="p-2">🏰 Lorcana</th><th class="p-2">🏴‍☠️ One Piece</th><th class="p-2">ชนะ</th></tr></thead>
+          <tbody>{L.VERSUS.map((v) => (<tr class="border-t border-[var(--border)]"><td class="p-2 font-medium">{v.dim}</td><td class="p-2 text-slate-500">{v.lorcana}</td><td class="p-2 text-slate-500">{v.op}</td><td class="whitespace-nowrap p-2 font-semibold">{v.win}</td></tr>))}</tbody>
+        </table></div>
+        <p class="mt-3 text-sm"><b>สรุป (ความเห็น):</b> 🎯 เก็ง sealed/store of value → <b>One Piece ชนะ</b> (Bandai พิมพ์ไม่พอ = scarcity จริง) · 🏰 สะสมระยะยาว/ดีมานด์ทน → <b>Lorcana ชนะ</b> (IP Disney ไม่จบ + ฐานแฟนกว้าง) แต่ซื้อเฉพาะของหายากจริง</p>
+        <p class="mt-2 text-sm"><a href={noteLink('Lorcana vs One Piece')} class="text-[var(--accent)] hover:underline">📖 อ่านเทียบเต็ม →</a></p>
+      </div>
+
+      <div class="card mt-5 p-4">
+        <h3 class="mb-2 font-bold">🗓️ Catalyst ที่จับตา</h3>
+        <div class="flex gap-3 overflow-x-auto pb-2">
+          {L.CATALYSTS.map((c) => (
+            <div class="min-w-[150px] shrink-0 border-l-2 border-purple-400 pl-2">
+              <div class="text-xs font-bold text-purple-600">{c.date}</div>
+              <div class="text-sm text-slate-700">{c.event}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-10 border-t border-[var(--border)] pt-5 text-sm text-slate-500">
+      <span class="font-semibold text-slate-700">ที่มาข้อมูล (โน้ตในคลัง):</span>
+      {L.sourceNotes.map((t, i) => (<>{i > 0 && ' · '}<a href={noteLink(t.slice(0, 14))} class="text-[var(--accent)] hover:underline">{t}</a></>))}
+      <p class="mt-2 text-xs text-slate-400">ทุกตัวเลขเป็น snapshot มิ.ย. 2026 · ⚠️/❌ = ยังไม่ยืนยัน/ถูก refute ตามต้นฉบับ · ใช้ราคา sold ไม่ใช่ ask · เช็คล่าสุดก่อนตัดสินใจเสมอ</p>
+    </section>
+  </main>
+
+  <script id="dash-data" type="application/json" is:inline set:html={chartsJson}></script>
+  <script>
+    import Chart from 'chart.js/auto';
+    const el = document.getElementById('dash-data');
+    if (el) {
+      const configs = JSON.parse(el.textContent || '{}');
+      for (const [id, config] of Object.entries(configs)) {
+        const canvas = document.getElementById('chart-' + id);
+        if (canvas) new Chart(canvas as HTMLCanvasElement, config as any);
+      }
+    }
+  </script>
+</Base>
