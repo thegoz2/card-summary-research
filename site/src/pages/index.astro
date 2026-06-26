@@ -63,7 +63,7 @@ const lastUpdatedStr = lastUpdated ? new Date(lastUpdated).toISOString().slice(0
 
       <div class="mt-5 grid gap-4 sm:grid-cols-2">
         <!-- One Piece -->
-        <div class="card flex flex-col p-5">
+        <div class="card flex flex-col p-5" data-theme="op">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2 text-lg font-bold">🏴‍☠️ One Piece TCG</div>
             <span class="chip">{projCount('optcg')} โน้ต</span>
@@ -75,7 +75,7 @@ const lastUpdatedStr = lastUpdated ? new Date(lastUpdated).toISOString().slice(0
           </div>
         </div>
         <!-- Lorcana -->
-        <div class="card flex flex-col p-5">
+        <div class="card flex flex-col p-5" data-theme="lorcana">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2 text-lg font-bold">🏰 Disney Lorcana</div>
             <span class="chip">{projCount('lorcana')} โน้ต</span>

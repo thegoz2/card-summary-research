@@ -53,7 +53,7 @@ sources:
 
 ---
 
-## โครงสร้างโปรเจกต์ Lorcana (27 โน้ต)
+## โครงสร้างโปรเจกต์ Lorcana (30 โน้ต)
 
 **🏠 ศูนย์กลาง / ลงมือ**
 | โน้ต | เนื้อหา |
@@ -71,6 +71,7 @@ sources:
 | 🔮 [[พยากรณ์ตลาด Lorcana 2026-2028]] | 3 scenario (Bull/Base/Bear) + ตัวแปรชี้ขาด |
 | 🃏 [[Deck meta Lorcana ปัจจุบัน (มิ.ย. 2026)]] | meta แข่งขัน + play-demand + rotation risk |
 | 🌍 [[อิทธิพลภายนอก + กลุ่มลูกค้า + ดิจิทัล Lorcana]] | catalyst (หนัง/D23/Pixar) + ใครซื้อ + gap ดิจิทัล |
+| 🎭 [[พฤติกรรมแปลก + สัญญาณตลาด TCG (manipulation-sentiment)]] | buyout/pump-dump/anchoring + influencer/meta/contrarian signals |
 | ⚖️ [[Lorcana vs One Piece TCG — ลงทุนตัวไหน]] | เทียบ head-to-head, anti-scarcity, Disney moat, catalyst |
 
 **🏆 เลือกการ์ด / เก็งกำไร**
@@ -81,6 +82,7 @@ sources:
 | 📊 [[อันดับความนิยมตัวละคร Disney + นัยต่อ Lorcana]] | อันดับความนิยมตัวละคร + "ดังแต่การ์ดยังถูก" (Maui/Maleficent) |
 | 🃏 [[รายชื่อชุด Lorcana + ระบบ rarity + chase cards]] | ชุด 1–14, rarity 8 ระดับ, First Chapter saga, การ์ดแพง, MSRP |
 | 🎲 [[Pull Rate ดรอปเรต Lorcana + โอกาสได้การ์ดดี]] | โอกาสได้ chase, foil slot, box-opening จริง, EV, gem rate |
+| 🎟️ [[promo Lorcana — ตัวไหนควรเก็บ]] | taxonomy promo (D23/championship/league) + ตัวไหน scarcity แท้ควรเก็บ |
 
 **🛒 ซื้อ / ผลิต / เก็บ**
 | โน้ต | เนื้อหา |
@@ -100,9 +102,10 @@ sources:
 | ⚖️ [[เทียบค่ายตรวจเกรด (PSA-CGC-BGS-SGC-TAG-CCC) ข้อดีข้อเสีย]] | ข้อดี-ข้อเสียรายค่าย + เลือกค่ายไหน |
 | 🔎 [[เจาะลึก PSA vs TAG vs BGS — fee, break-even, ส่งจากไทย]] | fee tier 2026 + break-even + ส่งจากไทยรายค่าย |
 | 📜 [[ประวัติแบรนด์ตรวจเกรด (PSA-BGS-SGC-CGC-TAG)]] | กำเนิด grading + ประวัติรายค่าย + การควบรวม Collectors |
+| 🔮 [[อนาคตแบรนด์ตรวจเกรด 2026-2028]] | AI/automation, antitrust, Fanatics-CGC, outlook รายค่าย |
 | 🇹🇭 [[ตลาด Lorcana ในไทย + SEA (มิ.ย. 2026)]] | Saka Saka, ซื้อที่ไหน, ราคา THB, คอมมูนิตี้, ภาษีนำเข้า |
 
-> [!note] ครบ 27 โน้ตแล้ว (เทียบ OP TCG 32 โน้ต/18 รอบ) — ครอบคลุมวงจรเต็ม ซื้อ→เก็บ→เลือก→ขาย→ภาษี ถ้าอยากต่ออีกบอกได้
+> [!note] ครบ 30 โน้ตแล้ว (เทียบ OP TCG 32 โน้ต/18 รอบ) — ครอบคลุมวงจรเต็ม ซื้อ→เก็บ→เลือก→ขาย→ภาษี + เกรด 5 โน้ต ถ้าอยากต่ออีกบอกได้
 
 ---
 

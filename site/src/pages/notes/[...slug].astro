@@ -7,6 +7,7 @@ import {
   noteTags,
   categoryOf,
   backlinks,
+  projectOf,
 } from '../../lib/notes';
 import { url } from '../../lib/url';
 
@@ -21,6 +22,7 @@ const { Content, headings } = await render(note);
 
 const title = noteTitle(note);
 const cat = categoryOf(note);
+const proj = projectOf(note).key === 'lorcana' ? 'lorcana' : 'op';
 const tags = noteTags(note);
 const sources = (note.data.sources as string[] | undefined) ?? [];
 const links = backlinks(note, all);
@@ -39,7 +41,7 @@ function hostOf(url: string) {
 }
 ---
 
-<Base title={title}>
+<Base title={title} theme={proj}>
   <main class="mx-auto max-w-6xl px-4 py-6">
     <a href={url('/')} class="text-sm text-slate-500 hover:text-[var(--accent)]">← หน้าแรก</a>
 

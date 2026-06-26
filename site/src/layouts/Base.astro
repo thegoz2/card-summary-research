@@ -5,18 +5,23 @@ import Header from '../components/Header.astro';
 interface Props {
   title?: string;
   description?: string;
+  theme?: 'op' | 'lorcana' | '';
 }
-const { title = 'Card Research', description = 'งานวิจัยการ์ดสะสม (One Piece TCG · Disney Lorcana) — อ่านง่าย วิเคราะห์ได้' } =
-  Astro.props;
+const {
+  title = 'Card Research',
+  description = 'งานวิจัยการ์ดสะสม (One Piece TCG · Disney Lorcana) — อ่านง่าย วิเคราะห์ได้',
+  theme = '',
+} = Astro.props;
 const fullTitle = title === 'Card Research' ? title : `${title} · Card Research`;
 ---
 
 <!doctype html>
-<html lang="th">
+<html lang="th" data-theme={theme || undefined}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#0b1220" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🃏</text></svg>" />

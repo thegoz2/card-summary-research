@@ -69,10 +69,12 @@ sources:
 - **scale:** 1–10, **TAG 10 Pristine** + AI subgrade
 - **resale:** ต่ำสุดใน 3 (~10–25% หลัง PSA) แต่กำลังโต
 
-**🇹🇭 ส่งจากไทย — ❌ ยากสุด:**
+**🇹🇭 ส่งจากไทย — ❌ ยากสุด (verify เพิ่ม 25 มิ.ย. 2026):**
 - HQ = **TAG Canada (Mississauga/Brampton, Ontario)** → route ไป TAG HQ US
-- **รับตรงเฉพาะ US/Canada** — นอกนั้น **ต้องผ่าน affiliate** | **affiliate เอเชียมีแค่ POKECARD.HK (ฮ่องกง)** + Concept Grading (สิงคโปร์/มาเลย์, TAG dealer) — **ไม่มีตัวแทนไทย** ❌
-- TAG **ห้ามส่งตรงจากต่างประเทศ** (พัสดุโดนภาษีอาจถูกตีกลับ) → คนไทยต้อง route ผ่าน HK/SG เท่านั้น
+- **รับตรงเฉพาะ US/Canada** — นอกนั้น **ต้องผ่าน affiliate** | **affiliate เอเชียมีแค่ POKECARD.HK (ฮ่องกง)** + Concept Grading (สิงคโปร์/มาเลย์, TAG dealer) — **ไม่มี dealer/ตัวแทน TAG ในไทยอย่างเป็นทางการ** ❌
+- TAG **ห้ามส่งตรงจากต่างประเทศ** (พัสดุโดนภาษีอาจถูกตีกลับ)
+- ⚠️ **แต่นักสะสมไทยส่ง TAG กันจริง** — มีรีวิว/ถาม-ตอบในกลุ่ม FB "One Piece Thailand Market" (self-submit + ส่ง intl เอง / รวมกลุ่ม / ผ่าน affiliate HK-SG) | pkmhobby มี**บทความสอน** (ไม่ใช่บริการ; ฿360–720/ใบ = เรตทางการ TAG เอง) | **SQC = ค่ายเกรดไทยเอง คนละเจ้า ไม่ใช่ proxy TAG**
+- 👉 ถ้าอยากส่งในไทยจบสะดวก **PSA มี proxy ไทย (CardKub/The Cardster) แต่ TAG ไม่มี** → ถาม affiliate HK/SG หรือกลุ่ม FB
 
 ---
 

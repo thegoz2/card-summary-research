@@ -131,7 +131,7 @@ const dot = (s: string) => (s === 'green' ? '🟢' : s === 'yellow' ? '🟡' : '
 const topIconic = L.SINGLES[0];
 ---
 
-<Base title="Dashboard Lorcana">
+<Base title="Dashboard Lorcana" theme="lorcana">
   <main class="mx-auto max-w-6xl px-4 py-6">
     <div class="flex flex-wrap items-end justify-between gap-2">
       <div>
@@ -403,6 +403,8 @@ const topIconic = L.SINGLES[0];
   <script id="dash-data" type="application/json" is:inline set:html={chartsJson}></script>
   <script>
     import Chart from 'chart.js/auto';
+    Chart.defaults.color = '#9fb0c9';
+    Chart.defaults.borderColor = 'rgba(148,163,184,0.16)';
     const el = document.getElementById('dash-data');
     if (el) {
       const configs = JSON.parse(el.textContent || '{}');
