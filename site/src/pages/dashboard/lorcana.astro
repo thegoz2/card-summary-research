@@ -297,6 +297,21 @@ const topIconic = L.SINGLES[0];
             <li class="text-amber-400">💡 สั่งตรงร้าน UK (zero-rated) ประหยัด ~฿780/กล่อง เทียบผ่านบ้านเพื่อน</li>
           </ul>
         </div>
+
+        <div class="mt-4">
+          <div class="mb-2 text-sm font-semibold">🛒 ร้านค้า UK (สั่งตรงได้)</div>
+          <div class="table-wrap"><table class="w-full text-sm">
+            <thead><tr class="text-left text-slate-500"><th class="p-2">ร้าน</th><th class="p-2">ราคา</th><th class="p-2">หมายเหตุ</th></tr></thead>
+            <tbody>{L.UK_SHOPS.map((s) => (
+              <tr class="border-t border-[var(--border)]">
+                <td class="p-2 font-medium"><a href={s.url} target="_blank" rel="noopener" class="text-[var(--accent)] hover:underline">{s.shop} ↗</a></td>
+                <td class="p-2">{s.price}</td>
+                <td class="p-2 text-slate-400">{s.note}</td>
+              </tr>
+            ))}</tbody>
+          </table></div>
+          <p class="mt-1 text-xs text-slate-400">distributor (สำหรับร้านค้า): {L.UK_DISTRIBUTORS} · ⚠️ สั่งให้ร้านส่งตรงมาไทย = zero-rated (หัก VAT 20%) — อย่าส่งผ่านที่อยู่ใน UK (VAT จม)</p>
+        </div>
       </div>
     </section>
 

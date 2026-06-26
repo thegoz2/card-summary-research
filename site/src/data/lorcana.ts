@@ -337,6 +337,12 @@ export const UK_BREAKDOWN = {
     { label: 'เคลียร์/handling', color: '#64748b', data: [150, 150, 150] },
   ],
 };
+export const UK_SHOPS = [
+  { shop: 'Chaos Cards', url: 'https://chaoscards.co.uk', price: 'box £45.95 (RRP £54.99)', note: 'discounter ถูกสุด ✅' },
+  { shop: 'Total Cards', url: 'https://www.totalcards.net', price: 'case ~£82.88/กล่อง', note: 'ซื้อยกลังถูก/กล่อง' },
+  { shop: 'Magic Madhouse', url: 'https://www.magicmadhouse.co.uk', price: 'RRP £49.99–54.99', note: 'ร้านใหญ่ ของครบ' },
+];
+export const UK_DISTRIBUTORS = 'Asmodee UK / Esdevium (B2B สำหรับร้านค้าเท่านั้น)';
 export const UK_FACTS = [
   'ราคา box: discounter/RRP £46–55 · รีเทลรวม VAT £87–120',
   'ค่าส่ง/กล่อง: Royal Mail Tracked £40–52 · broker/Evri £20–35 · ยกลัง £95–140',
