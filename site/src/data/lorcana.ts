@@ -282,8 +282,52 @@ export const UPSIDE = [
   { pick: 'Elsa / Anna', signal: 'Frozen 3 (24 พ.ย. 2027)', note: 'catalyst ระยะยาว printing ใหม่' },
 ];
 
+// 30) GOLDEN RULES (จับปั่น)
+export const GOLDEN = [
+  'เทรดด้วย "ราคาที่ขายได้จริง (sold)" เท่านั้น — ราคาตั้งขาย (ask) เกินจริง 15–40% ตอนของขายบาง',
+  '"ลายนิ้วมือการกว้านซื้อ": วอลุ่มพุ่ง 8–20 เท่า + ซื้อหลายสิบใบ/คน + ไม่มีเหตุ = ปั่น → อย่าไล่ ถ้าถืออยู่ให้ขายเข้า spike',
+];
+
+// 31) 6-step detection workflow
+export const DETECT = [
+  { step: 1, check: 'ดูราคาที่ขายได้จริง (sold) ไม่ใช่ราคาตั้งขาย', flag: 'market ห่าง sold >15–40% + ของตั้งขายบาง' },
+  { step: 2, check: 'มีเหตุพื้นฐานไหม (meta / ข่าว / หนัง)', flag: 'พุ่งแรงแต่ไม่มีเหตุ = ปั่น (ถ้ามี reprint ควรตก)' },
+  { step: 3, check: 'วอลุ่มขาย + จำนวนใบต่อคน', flag: 'วอลุ่ม 8–20 เท่า + สิบ-หลายสิบใบ/คน (ปกติ 1–2)' },
+  { step: 4, check: 'ประวัติบิดประมูล (shill)', flag: 'ผู้ชนะบัญชีใหม่/คะแนนต่ำ · รีลิสต์ "ไม่จ่าย"' },
+  { step: 5, check: 'โซเชียล (ปั่นข่าว)', flag: 'mention พุ่งของการ์ดไม่ดัง + คนเชียร์มีของขายเอง' },
+  { step: 6, check: 'รายงานจำนวนเกรด (pop)', flag: 'pop พุ่งเร็ว = คนถือเทขาย' },
+];
+
+// 32) Buyout cases — volume spike (เท่า)
+export const BUYOUT = [
+  { name: 'MTG Eon Hub', mult: 20, per: '~70 ใบ/คน' },
+  { name: 'Pokémon Gouging Fire', mult: 8, per: '~13 ใบ/คน' },
+];
+
+// 33) ปั่น vs ขึ้นจริง
+export const REAL_VS_FAKE = {
+  fake: ['พุ่งแต่ไม่มีเหตุ', 'ราคา sold ห่างราคาตั้งขายมาก', 'วอลุ่ม/ใบต่อคนผิดปกติ', 'มีธงโซเชียล/ประมูล', '+20–30% ใน 48 ชม. ไม่มี data หนุน'],
+  real: ['มีเหตุ (meta / reprint / IP / หนัง)', 'ราคา sold จริงขยับตาม', 'วอลุ่มกระจายหลายคน (1–2 ใบ/คน)', 'pop ต่ำ/นิ่ง + ดีมานด์ขึ้น'],
+};
+
+// 34) Seasonal windows
+export const SEASONAL = [
+  { period: 'พ.ย.–ต้น ม.ค.', tone: 'buy', note: 'ตลาดซอฟต์ (เงินไปของขวัญ) = หน้าต่างซื้อ' },
+  { period: 'กลาง ก.พ.', tone: 'sell', note: 'tax-refund (US) ดีมานด์เด้ง' },
+  { period: 'ส.ค.', tone: 'sell', note: 'ฤดูอีเวนต์ (Gen Con / D23 = catalyst IP)' },
+];
+
+// 35) ใครนำใคร (signal lead time)
+export const LEADS = [
+  'X (Twitter) นำ Reddit ~12–36 ชม.',
+  'Discord นำตลาด ~12–24 ชม.',
+  'สัญญาณผลทัวร์มา ~12–24 ชม. หลังจบ → foil/Iconic พุ่ง 30–60% ใน 48 ชม.',
+  'hype แหล่งเดียว (ไม่มี meta หนุน) จางใน ~4 วัน',
+];
+
 export const sourceNotes = [
   'Disney Lorcana — ทำกำไร (ภาพรวม)',
+  'พฤติกรรมแปลก + สัญญาณตลาด TCG',
   'เทียบค่ายตรวจเกรด (PSA-CGC-BGS-SGC-TAG-CCC) ข้อดีข้อเสีย',
   'อันดับความนิยมตัวละคร Disney + นัยต่อ Lorcana',
   'ตลาด Lorcana 2023-2026 — ราคาเริ่มฟื้นจริงไหม',

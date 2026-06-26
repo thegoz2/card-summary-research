@@ -27,6 +27,25 @@ sources:
 
 ---
 
+## 🔍 วิธีตรวจว่า "ปั่น" หรือ "ขึ้นจริง" — workflow 6 ขั้น
+
+> [!warning] ใช้ทุกครั้งก่อนซื้อตามราคาที่พุ่ง
+
+| ขั้น | เช็กอะไร | เครื่องมือ | 🚩 ธงปั่น |
+|---|---|---|---|
+| **1** | **ราคาขายจริง ไม่ใช่ ask** | TCGplayer (Sold/history), eBay (Sold+Completed/Terapeak), PriceCharting, Cardmarket | market ห่าง paid sales >15–40% + listing บาง = anchoring |
+| **2** | **มีเหตุพื้นฐานไหม** | inkDecks/Limitless (meta), ข่าว reveal/reprint, ข่าวหนัง/IP, คลิป influencer | spike แรง + **ไม่มีเหตุเลย** = ปั่น (ถ้ามี reprint → ควร*ตก* ไม่ใช่ขึ้น) |
+| **3** | **volume + ใบ/คน** (buyout) | TCGplayer "Biggest Spikes"/sales volume | วอลุ่ม **8–20×** + **สิบ-หลายสิบใบ/คน** (ปกติ 1–2) + listing หายแล้วเติมแพงกว่า |
+| **4** | **auction (shill)** | eBay bid history | ผู้ชนะ feedback ต่ำ(<20)/บัญชีใหม่ · บัญชีเดิมดันผู้ขายรายเดียวซ้ำ · รีลิสต์ "ผู้ชนะไม่จ่าย" |
+| **5** | **social (pump-dump)** | X/Reddit/Discord/FB | mention พุ่งของการ์ด**ไม่ดัง**+ไม่มีเหตุ · คนเชียร์**มีของลิสต์ขาย** · X นำ 12–36 ชม. |
+| **6** | **pop report** (distribution) | PSA/CGC pop, PriceCharting | pop เกรด**พุ่งเร็ว** = holder เทขาย |
+
+> [!check] สรุป decision
+> - 🔴 **ปั่น** = spike + ❌ไม่มีเหตุ + sold/listed ห่างมาก + volume/ใบต่อคนผิดปกติ + (social/auction มีธง) → **อย่าไล่; ถือ = ขายเข้า spike; ไม่ถือ = รอ 2–4 สัปดาห์**
+> - 🟢 **ขึ้นจริง** = มีเหตุ (meta/reprint scarcity/IP/film) + **sold จริงขยับตาม** + volume กระจายหลายคน (1–2 ใบ/คน)
+
+---
+
 ## 1. Manipulation (ปั่นตลาด)
 
 ### 1.1 Buyout / cornering — กว้านซื้อหมดแล้วดันราคา

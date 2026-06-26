@@ -22,6 +22,7 @@ const SECTIONS = [
   { id: 'cost', label: '🚚 ต้นทุน' },
   { id: 'graders', label: '🎖️ ค่ายเกรด & ตัวละคร' },
   { id: 'strategy', label: '🎯 กลยุทธ์' },
+  { id: 'behavior', label: '🕵️ ปั่น/จังหวะ' },
   { id: 'versus', label: '⚖️ เทียบ OP' },
 ];
 
@@ -122,6 +123,11 @@ const charts: Record<string, unknown> = {
     type: 'bar',
     data: { labels: L.FRANCHISE.map((f) => f.name), datasets: [{ data: L.FRANCHISE.map((f) => f.usd), backgroundColor: purple, borderRadius: 5 }] },
     options: { ...base, indexAxis: 'y', plugins: noLegend, scales: { x: { title: { display: true, text: 'รายได้สะสม $B (all-time)' } } } },
+  },
+  buyout: {
+    type: 'bar',
+    data: { labels: L.BUYOUT.map((b) => b.name), datasets: [{ data: L.BUYOUT.map((b) => b.mult), backgroundColor: red, borderRadius: 5 }] },
+    options: { ...base, indexAxis: 'y', plugins: noLegend, scales: { x: { title: { display: true, text: 'วอลุ่มขายพุ่ง (เท่า) ตอนถูกกว้านซื้อ' } } } },
   },
 };
 const chartsJson = JSON.stringify(charts).replaceAll('<', '\\u003c');
@@ -365,6 +371,59 @@ const topIconic = L.SINGLES[0];
         <h3 class="mb-2 font-bold">⚠️ ทำไมคนเจ๊ง</h3>
         <ul class="space-y-1.5 text-sm text-slate-600">{L.WHY_LOSE.map((w) => (<li>• <b>{w.mode}</b> — {w.num}</li>))}</ul>
       </div>
+    </section>
+
+    <!-- BEHAVIOR / MANIPULATION -->
+    <section id="behavior" class="scroll-mt-28 pt-10">
+      <h2 class="dash-h2">🕵️ ปั่นหรือขึ้นจริง? + จังหวะตลาด</h2>
+      <p class="section-lead">วิธีดูว่าราคาที่พุ่ง "ถูกปั่น" หรือ "ขึ้นจริง" และช่วงไหนของปีควรซื้อ/ขาย (มุมจิตวิทยา)</p>
+
+      <div class="rounded-xl border border-[var(--border)] p-4" style="background:rgba(248,113,113,0.08)">
+        <div class="font-bold">🔑 2 กฎทอง</div>
+        <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-300">{L.GOLDEN.map((g) => <li>{g}</li>)}</ul>
+      </div>
+
+      <div class="mt-5 grid gap-5 lg:grid-cols-2">
+        <div class="card p-4">
+          <h3 class="mb-1 font-bold">เคสกว้านซื้อ (ปั่น) — วอลุ่มพุ่งกี่เท่า</h3>
+          <p class="mb-3 text-xs text-slate-500">ปกติคนซื้อ 1–2 ใบ · ถ้าพุ่ง 8–20 เท่า + ซื้อหลายสิบใบ/คน = ปั่น</p>
+          <div class="h-44"><canvas id="chart-buyout"></canvas></div>
+          <div class="mt-2 text-xs text-slate-400">{L.BUYOUT.map((b) => <span class="mr-3">{b.name}: {b.per}</span>)}</div>
+        </div>
+        <div class="card p-4">
+          <h3 class="mb-2 font-bold">🔴 ปั่น vs 🟢 ขึ้นจริง</h3>
+          <div class="grid grid-cols-2 gap-3 text-sm">
+            <div><div class="mb-1 font-semibold text-red-400">🔴 ปั่น (อย่าไล่)</div><ul class="list-disc space-y-1 pl-4 text-slate-300">{L.REAL_VS_FAKE.fake.map((x) => <li>{x}</li>)}</ul></div>
+            <div><div class="mb-1 font-semibold text-green-400">🟢 ขึ้นจริง</div><ul class="list-disc space-y-1 pl-4 text-slate-300">{L.REAL_VS_FAKE.real.map((x) => <li>{x}</li>)}</ul></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt-5 p-4">
+        <h3 class="mb-2 font-bold">เช็ก 6 ขั้น ก่อนซื้อตามราคาที่พุ่ง</h3>
+        <div class="table-wrap"><table class="w-full text-sm">
+          <thead><tr class="text-left text-slate-500"><th class="p-2">#</th><th class="p-2">เช็กอะไร</th><th class="p-2">🚩 ธงปั่น</th></tr></thead>
+          <tbody>{L.DETECT.map((d) => (<tr class="border-t border-[var(--border)]"><td class="p-2 font-bold">{d.step}</td><td class="p-2">{d.check}</td><td class="p-2 text-slate-400">{d.flag}</td></tr>))}</tbody>
+        </table></div>
+      </div>
+
+      <div class="mt-5 grid gap-5 lg:grid-cols-2">
+        <div class="card p-4">
+          <h3 class="mb-2 font-bold">🗓️ จังหวะตามฤดู</h3>
+          <div class="space-y-2">{L.SEASONAL.map((s) => (
+            <div class="flex flex-wrap items-center gap-2 text-sm">
+              <span class:list={['rounded px-2 py-0.5 text-xs font-bold', s.tone === 'buy' ? 'bg-green-50 text-green-400' : 'bg-red-50 text-red-400']}>{s.tone === 'buy' ? 'ซื้อ' : 'ขาย'}</span>
+              <span class="font-medium">{s.period}</span><span class="text-slate-400">— {s.note}</span>
+            </div>
+          ))}</div>
+        </div>
+        <div class="card p-4">
+          <h3 class="mb-2 font-bold">⏱️ ใครนำใคร (สัญญาณมาก่อน)</h3>
+          <ul class="space-y-1.5 text-sm text-slate-300">{L.LEADS.map((l) => <li>• {l}</li>)}</ul>
+        </div>
+      </div>
+
+      <p class="mt-3 text-xs text-slate-400">⚠️ ตัวเลขเกณฑ์ส่วนใหญ่อิงตลาด Pokémon (ใช้เชิงทิศทางกับ Lorcana) · <a href={noteLink('พฤติกรรมแปลก')} class="text-[var(--accent)] hover:underline">อ่านโน้ตเต็ม →</a></p>
     </section>
 
     <!-- VERSUS -->
