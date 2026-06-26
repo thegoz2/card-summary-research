@@ -3,8 +3,11 @@
 // Core thesis: Ravensburger = ANTI-scarcity (no Reserved List) → sealed is a weak
 // store of value; only scarcity-capped chase (Enchanted/Iconic/promo) holds value.
 
+// Fact re-check 2026-06-27: Mickey merch ~$3B/ปี (ไม่ใช่ $9B; $9B = projection ปี 2011), Stitch +54% YoY,
+//   Gundam แซงเฉพาะไตรมาสเปิดตัว Q3 2025, First Chapter box ~$400, Value tier ปิด 2 มิ.ย. 2026.
+//   ค่าเกรดคงตามหน้าทางการในโน้ต · Set 11 Winterspell (ก.พ. 2026) มีในโน้ตแล้ว · ราคา single เป็น snapshot มิ.ย. 2026.
 export const META = {
-  asOf: '2026-06-24',
+  asOf: '2026-06-27',
   fx: '1 USD = 33 ฿ · 1 EUR = 36 ฿ · 1 GBP = 42 ฿',
   rankNow: '#5–6',
   rankNote: 'ร่วงจาก #3 (2023-24) — หลัง MTG/Pokémon/One Piece/Yu-Gi-Oh!',
@@ -34,7 +37,7 @@ export type Signal = 'green' | 'yellow' | 'red';
 export const SIGNALS: { id: number; name: string; status: Signal; detail: string }[] = [
   { id: 1, name: 'TCGplayer "Dropping" report โผล่', status: 'yellow', detail: 'ยังมีแต่ "Climbing" (survivorship bias) — วันที่ Dropping มา = เลี้ยว' },
   { id: 2, name: 'ยอดขายรายปี', status: 'red', detail: 'ตกปี 2025 "normalized at high level" + นักเก็งกำไรถอน' },
-  { id: 3, name: 'อันดับ TCG รายไตรมาส', status: 'red', detail: '#3 → #5 → #6 (ต่ำกว่า One Piece + Gundam)' },
+  { id: 3, name: 'อันดับ TCG รายไตรมาส', status: 'red', detail: '#3 → #5 → #6 (ต่ำกว่า One Piece · Gundam แซงเฉพาะไตรมาสเปิดตัว Q3 2025 แล้วร่วงไป #8 เอง)' },
   { id: 4, name: 'คู่แข่งแย่ง wallet', status: 'red', detail: 'Gundam (ก.ค. 2025) เปิดเหนือ Lorcana · OP/Pokémon โต' },
   { id: 5, name: 'ปริมาณการเกรด (GemRate)', status: 'yellow', detail: '⚪ data gap — spike ใกล้พีค = distribution (ต้องจับเอง)' },
   { id: 6, name: 'reprint / set cadence', status: 'red', detail: '4 ชุด/ปี · เคส Pokémon: ข่าว reprint อย่างเดียว = −21%' },
@@ -73,7 +76,7 @@ export const BOX_ARC = [
   { t: 'MSRP (ก.ย. 2023)', usd: 144 },
   { t: 'พีค (ปลาย 2023)', usd: 402 },
   { t: 'หลัง reprint (ธ.ค. 2023)', usd: 155 },
-  { t: 'ปัจจุบัน (2026)', usd: 375 },
+  { t: 'ปัจจุบัน (2026)', usd: 400 },
 ];
 
 // 7) Cheapest accessible box by region (in-print, $/box)
@@ -132,7 +135,8 @@ export const PULL_SET = [
   { set: 'Reign of Jafar', pct: 1.22 },
 ];
 
-// 13) GRADING fee tiers (USD/card) — PSA Value tiers ปิด มิ.ย. 2026 (backlog)
+// 13) GRADING fee tiers (USD/card) — PSA Value tiers ปิด 2 มิ.ย. 2026 (backlog)
+// ตัวเลขจากหน้าทางการในโน้ต (มิ.ย. 2026) · CGC Bulk $17 ไม่ต้องสมาชิก · PSA +~$5/ใบ ก.พ. 2026
 export const GRADING = [
   { tier: 'CGC Bulk', usd: 17, co: 'CGC' },
   { tier: 'CGC Economy', usd: 20, co: 'CGC' },
@@ -250,7 +254,7 @@ export const GRADERS = [
   { co: 'CCC', cheapest: 19, resale: 15, asia: '❌', fit: '❌ (EU niche)', indep: true },
 ];
 export const GRADER_NOTE =
-  'Collectors (แม่ PSA) ซื้อ SGC + BGS แล้ว = ครอง ~80% ตลาด · เหลือ CGC + TAG เป็น independent · PSA Value tier ปิด มิ.ย. 2026 → floor = Regular $79.99';
+  'Collectors (แม่ PSA) ซื้อ SGC (ก.พ. 2024) + BGS (ธ.ค. 2025) แล้ว = ครอง ~80% ตลาด · เหลือ CGC + TAG เป็น independent · PSA Value tier ปิด 2 มิ.ย. 2026 → floor = Regular $79.99';
 
 // 26) Break-even all-in cost/ใบ (USD, batch) — PSA / TAG / BGS
 export const BREAKEVEN = [
@@ -270,9 +274,10 @@ export const FRANCHISE = [
 ];
 
 // 28) Annual merch ($B) — demand ปัจจุบัน (สัญญาณดีสุด)
+// Mickey ~$3B/ปี (WSJ; $9B เป็น projection ปี 2011 ครั้งเดียว ไม่ใช่ run-rate) · Stitch $4B FY2025 (+54% YoY จาก $2.6B)
 export const MERCH = [
-  { name: 'Mickey & Friends', usd: 9 },
-  { name: 'Stitch (FY2025, โต 10× ใน 6 ปี)', usd: 4 },
+  { name: 'Stitch (FY2025, +54% YoY)', usd: 4 },
+  { name: 'Mickey & Friends (recent)', usd: 3 },
 ];
 
 // 29) Asymmetric upside (ดังแต่การ์ดยังถูก + มี catalyst)

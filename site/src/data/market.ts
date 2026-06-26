@@ -1,9 +1,11 @@
 // Curated numeric data for the dashboard, seeded from the vault notes
 // (adversarially verified — confidence markers preserved: ✅ verified / ⚠️ partial / ❌ refuted).
 // Update when the underlying notes change, or ask Claude to re-sync.
-
+// Fact re-check 2026-06-27: PRB EB02-061 floor ~$10–13, OP-16 Admirals = Super Alt-Art (ไม่ใช่ Manga Rare),
+//   OP-17 ชื่อ/วันยังไม่ official, จุ่ม penalty (organizer ม.12 = 3 ด.–3 ปี), Charizard arc, Pokémon mkt size→⚠️,
+//   Value tier ปิด 2 มิ.ย. 2026. ค่าเกรดคงตามหน้าทางการในโน้ต ($17/$20/$149/$299). Market price snapshots ยังเป็น มิ.ย. 2026.
 export const META = {
-  asOf: '2026-06-17',
+  asOf: '2026-06-27',
   rates: '1 USD = 35 ฿ · 100 JPY = 23 ฿ · 1 SGD = 26 ฿ · 1 HKD = 4.5 ฿ · 1 MYR = 7.5 ฿',
   speculatorShare: 75, // % of market that is speculative (was ~25% 2-3 yrs ago)
   bubbleSignals: { present: 10, total: 14 },
@@ -42,8 +44,8 @@ export const BUBBLE: { id: number; name: string; status: Signal; detail: string 
   { id: 2, name: 'ดัชนี Leader Alt-Art', status: 'green', detail: '130.7 — ยืนเหนือ 120' },
   { id: 3, name: 'Manga Rare ตัวดัง PSA10', status: 'yellow', detail: 'ยังไม่จด eBay sold จริง — สร้างฐานข้อมูล' },
   { id: 4, name: 'Pattern ราคา sealed ชุดใหม่', status: 'yellow', detail: 'OP-15 chase −30–40% / OP-16 ต้องเฝ้า' },
-  { id: 5, name: 'ข่าว Bandai reprint / PRB', status: 'yellow', detail: 'PRB กด Luffy 061 จาก >$100 → ~$25' },
-  { id: 6, name: 'สัญญาณ speculator (คดีจุ่ม/ดราม่า)', status: 'yellow', detail: 'เคสจุ่มโกง 160,000 ฿ (เม.ย. 2026)' },
+  { id: 5, name: 'ข่าว Bandai reprint / PRB', status: 'yellow', detail: 'PRB-02 (ต.ค. 2025) กด Luffy EB02-061 จาก >$100 → ~$10–13' },
+  { id: 6, name: 'สัญญาณ speculator (คดีจุ่ม/ดราม่า)', status: 'yellow', detail: 'ดราม่าจุ่ม/กล่องสุ่ม (เคส 160k ฿ เม.ย. 2026 ⚠️ ยังไม่ยืนยันแหล่ง)' },
   { id: 7, name: 'ข่าว IP One Piece', status: 'green', detail: 'Final Saga ดำเนินต่อ ยังไม่มีวันจบทางการ' },
   { id: 8, name: 'Competitive scene', status: 'green', detail: 'คนไทยแชมป์โลก 2025-26, Flagship ต่อเนื่อง' },
 ];
@@ -141,14 +143,15 @@ export const SINGLES = [
 
 // Verified chase card (เฉพาะตัวที่ยืนยันได้)
 export const CHASE = [
-  { card: 'Manga Luffy OP05-119 PSA10', price: '~$9,000+', conf: '✅', note: 'ตัวเดียวที่ยืนยันราคาได้ · ⚠️ population สูง ผันผวน' },
+  { card: 'Manga Luffy OP05-119 PSA10', price: '~$5,600–9,000', conf: '✅', note: 'sold ล่าสุด ~$5,600–7,000 · ⚠️ population สูง ผันผวน' },
   { card: 'Luffy OP13-118 Manga PSA10 (Goldin)', price: '~$22,570 (sold 26 ก.พ. 2026)', conf: '✅', note: 'ราคาประมูลจริง' },
   { card: 'Shanks OP01-120 Manga (graded)', price: '$3,640–6,800', conf: '✅', note: 'เล่นไม่ได้ = พรีเมียมนักสะสมล้วน' },
 ];
 
 // ============================================================
 // 10) GRADING FEE TIERS (USD per card) — PSA vs CGC
-// ⚠️ PSA ขึ้นราคา ก.พ. 2026, Value tier พักรับ ~มิ.ย. 2026 · CGC ขึ้นราคา ม.ค. 2026
+// ตัวเลขจากหน้าทางการ (เข้าถึง มิ.ย. 2026) · PSA ขึ้นราคา ก.พ. 2026 (+~$5/ใบ), Value tier ปิดรับ 2 มิ.ย. 2026 (backlog)
+//    CGC มี fee increase Mar 2026 — Bulk $17 (ไม่ต้องสมาชิก) · flat TCG tier $20/ใบ ไม่จำกัดมูลค่า
 // ============================================================
 export const GRADING = [
   { tier: 'CGC Bulk', usd: 17, co: 'CGC' },
@@ -240,8 +243,8 @@ export const STRATEGIES = [
   },
   {
     name: 'จุ่ม (Lucky Dip)', emoji: '🎰', profit: 'มาร์จิ้นร้าน', risk: '🔴 สูงสุด (กฎหมาย)', beginner: '❌ ไม่แนะนำ',
-    rule: 'พ.ร.บ.พนัน 2478 ต้องมีใบอนุญาต ม.8 — ปรึกษาทนายก่อน',
-    evidence: 'เปิดบูธไม่มีใบอนุญาต = จำคุก ≤1 ปี / ปรับ ≤2,000 ฿',
+    rule: 'พ.ร.บ.พนัน 2478 ต้องมีใบอนุญาต (บัญชี ก / เสี่ยงโชค) — ปรึกษาทนายก่อน',
+    evidence: 'ผู้จัดไม่มีใบอนุญาต = จำคุก 3 ด.–3 ปี + ปรับ 500–5,000 ฿ (ม.12) · ผู้เล่น ≤1 ปี / ปรับ ≤1,000 ฿ (ม.9)',
   },
 ];
 
@@ -274,7 +277,7 @@ export const INVEST = [
 ];
 export const INVEST_RETURNS = {
   boom: 'Pokémon +3,821% (2004→2025) · การ์ดเฉลี่ย +46%/ปี ช่วงบูม',
-  bust: 'พอร์ต Pokémon −4.72%/ปี (2021–23) · Charizard PSA10 €340k → <€140k (−55%)',
+  bust: 'พอร์ต Pokémon −4.72%/ปี (2021–23) · Charizard 1st-ed PSA10 พีค ~$420k (2021) → ย่อ ~$180–300k (2023) ราว −40–55% (ก่อนทำสถิติใหม่ $550k ปลายปี 2025)',
   rule: 'นักวางแผนการเงินแนะนำ: ของสะสม ≤5% ของพอร์ต (สูงสุด 10%) ใช้เงินเย็นเท่านั้น',
 };
 
@@ -323,7 +326,7 @@ export const TIMELINE = [
   { code: 'OP-14', name: "The Azure Sea's Seven", date: 'ม.ค. 2026' },
   { code: 'OP-15', name: "Adventure on Kami's Island", date: 'เม.ย. 2026' },
   { code: 'OP-16', name: 'The Time of Battle', date: 'มิ.ย. 2026' },
-  { code: 'OP-17', name: "The World's Strongest Warriors", date: 'ส.ค. 2026 ⭐' },
+  { code: 'OP-17', name: "The World's Strongest Warriors (ชื่อคาด)", date: 'ส.ค. 2026 (คาด) ⭐' },
 ];
 
 // ============================================================
@@ -332,7 +335,7 @@ export const TIMELINE = [
 // ============================================================
 export const MARKET_SIZE = [
   { game: 'Sports (รวม)', usd: 9.21, conf: '⚠️' },
-  { game: 'Pokémon', usd: 2.9, conf: '✅' },
+  { game: 'Pokémon', usd: 2.9, conf: '⚠️' },
   { game: 'Bandai card (รวม OP)', usd: 1.99, conf: '⚠️' },
   { game: 'MTG', usd: 1.72, conf: '✅' },
   { game: 'OP TCG (เดี่ยว)', usd: 0.17, conf: '⚠️' },

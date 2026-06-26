@@ -27,7 +27,7 @@ export const CHARS: PopChar[] = [
   { project: 'optcg', name: 'Nico Robin', badge: 'ตัวหลัก (waifu)', note: 'แกนทีม + นิยมสายผู้หญิง', conf: '✅', pop: 64 },
   { project: 'optcg', name: 'Mihawk', badge: 'ดาบอันดับ 1', note: 'ตัวละครเท่ · นิยมสูง', conf: '✅', pop: 63 },
   { project: 'optcg', name: 'Doflamingo', badge: 'วายร้ายนิยม', note: 'วายร้ายระดับท็อป', conf: '✅', pop: 62 },
-  { project: 'optcg', name: 'Sakazuki / Kuzan / Borsalino', badge: 'Admiral', momentum: 'Manga Rare OP-16 (พุ่งวันแรก)', note: '3 ใบ Manga Rare แรกของ OP-16', conf: '✅', pop: 60 },
+  { project: 'optcg', name: 'Sakazuki / Kuzan / Borsalino', badge: 'Admiral', momentum: 'Super Alt-Art OP-16 (พุ่งวันแรก)', note: '3 ใบ Super Alt-Art ของ OP-16 (ธีม Paramount War)', conf: '✅', pop: 60 },
   { project: 'optcg', name: 'Uta', badge: 'FILM RED', momentum: 'หนัง', note: 'การ์ด/promo นิยมตามหนัง', conf: '✅', pop: 58 },
   { project: 'optcg', name: 'Gol D. Roger', badge: 'Legend', note: 'ราชาโจรสลัด · สะสมล้วน', conf: '✅', pop: 56 },
   { project: 'optcg', name: 'Sabo (ซาโบ)', badge: 'ตัวรอง', note: 'chase รองลงมา', conf: '⚠️', pop: 55 },
@@ -41,8 +41,8 @@ export const CHARS: PopChar[] = [
   { project: 'optcg', name: 'Jinbe / Brook / Franky / Usopp', badge: 'crew', note: 'ลูกเรือ Straw Hat (นิยมรองจากแกนหลัก)', conf: '⚠️', pop: 38 },
 
   // ===================== Disney / Lorcana =====================
-  { project: 'lorcana', name: 'Mickey & Friends', badge: 'เรือธง', metric: 'merch ~$9B/ปี · franchise $61.2B', momentum: 'ฐานแข็ง (อมตะ)', note: 'การ์ดมูลค่าสูงสุดของ Lorcana', conf: '✅', pop: 100 },
-  { project: 'lorcana', name: 'Stitch', badge: 'พุ่งแรง 🚀', metric: 'merch >$4B/ปี (โต 10× ใน 6 ปี)', momentum: '🚀 catalyst #1 2025–26 (หนัง $1B+)', note: 'กำลังแทน Mickey บน national tour', conf: '✅', pop: 96 },
+  { project: 'lorcana', name: 'Mickey & Friends', badge: 'เรือธง', metric: 'merch ~$3B/ปี · franchise $61.2B สะสม', momentum: 'ฐานแข็ง (อมตะ)', note: 'การ์ดมูลค่าสูงสุดของ Lorcana', conf: '✅', pop: 100 },
+  { project: 'lorcana', name: 'Stitch', badge: 'พุ่งแรง 🚀', metric: 'merch ~$4B FY2025 (+54% YoY)', momentum: '🚀 catalyst #1 2025–26 (หนัง $1B+)', note: 'กำลังแทน Mickey บน national tour', conf: '✅', pop: 96 },
   { project: 'lorcana', name: 'Elsa (Frozen)', badge: 'เจ้าหญิง S', metric: 'franchise $13.9B', momentum: 'Frozen 3 (พ.ย. 2027)', note: 'anchor นิ่งสุดของ Lorcana', conf: '✅', pop: 93 },
   { project: 'lorcana', name: 'Moana', badge: 'เจ้าหญิง S', momentum: '🚀 หนัง live-action 10 ก.ค. 2026', note: 'การ์ด Iconic กำลังขึ้น', conf: '✅', pop: 90 },
   { project: 'lorcana', name: 'Mufasa / Simba (Lion King)', badge: 'classic ⭐', momentum: 'Mufasa (หนัง 2024)', note: 'แฟรนไชส์ระดับท็อป', conf: '✅', pop: 85 },
