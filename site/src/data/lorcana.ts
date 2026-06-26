@@ -326,10 +326,31 @@ export const LEADS = [
   'hype แหล่งเดียว (ไม่มี meta หนุน) จางใน ~4 วัน',
 ];
 
+// 36) UK sourcing — ต้นทางถูกสุดของชุด in-print (แยกองค์ประกอบ landed ฿/กล่อง)
+export const UK_BREAKDOWN = {
+  routes: ['สั่งตรง zero-rated', 'ผ่านบ้านเพื่อน', 'ยกลัง (case 4)'],
+  localRef: 4550,
+  parts: [
+    { label: 'ราคา box', color: '#a855f7', data: [3326, 3990, 3326] },
+    { label: 'ค่าส่งมาไทย', color: '#3b82f6', data: [1680, 1680, 1155] },
+    { label: 'ภาษีไทย (อากร+VAT)', color: '#f59e0b', data: [886, 1004, 793] },
+    { label: 'เคลียร์/handling', color: '#64748b', data: [150, 150, 150] },
+  ],
+};
+export const UK_FACTS = [
+  'ราคา box: discounter/RRP £46–55 · รีเทลรวม VAT £87–120',
+  'ค่าส่ง/กล่อง: Royal Mail Tracked £40–52 · broker/Evri £20–35 · ยกลัง £95–140',
+  'VAT 20%: สั่งตรงจากร้าน (zero-rated หัก VAT) ดีกว่า "บ้านเพื่อน" (VAT จม ~฿660/กล่อง)',
+  'distributor: Asmodee UK / Esdevium (B2B)',
+];
+export const UK_VERDICT =
+  'UK/EU = ต้นทางถูกสุดของชุด in-print (ถูกกว่า US ~25–35%) — แต่ landed ถึงไทยยังแพงกว่าซื้อในไทยทุกเส้นทาง → คุ้มเฉพาะชุด out-of-print ที่ไทยหาไม่ได้ (เช่น First Chapter)';
+
 export const sourceNotes = [
   'Disney Lorcana — ทำกำไร (ภาพรวม)',
   'พฤติกรรมแปลก + สัญญาณตลาด TCG',
   'ตารางคำนวณ landed cost นำเข้า Lorcana',
+  'ซื้อ Lorcana ราคาต้นน้ำ',
   'เทียบค่ายตรวจเกรด (PSA-CGC-BGS-SGC-TAG-CCC) ข้อดีข้อเสีย',
   'อันดับความนิยมตัวละคร Disney + นัยต่อ Lorcana',
   'ตลาด Lorcana 2023-2026 — ราคาเริ่มฟื้นจริงไหม',

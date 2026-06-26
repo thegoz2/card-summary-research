@@ -129,6 +129,17 @@ const charts: Record<string, unknown> = {
     data: { labels: L.BUYOUT.map((b) => b.name), datasets: [{ data: L.BUYOUT.map((b) => b.mult), backgroundColor: red, borderRadius: 5 }] },
     options: { ...base, indexAxis: 'y', plugins: noLegend, scales: { x: { title: { display: true, text: 'วอลุ่มขายพุ่ง (เท่า) ตอนถูกกว้านซื้อ' } } } },
   },
+  ukbreak: {
+    type: 'bar',
+    data: {
+      labels: L.UK_BREAKDOWN.routes,
+      datasets: [
+        ...L.UK_BREAKDOWN.parts.map((p) => ({ label: p.label, data: p.data, backgroundColor: p.color, stack: 's', borderRadius: 3 })),
+        { type: 'line', label: 'ซื้อในไทย ~4,550', data: L.UK_BREAKDOWN.routes.map(() => L.UK_BREAKDOWN.localRef), borderColor: green, borderDash: [5, 4], pointRadius: 0, borderWidth: 2 },
+      ],
+    },
+    options: { ...base, plugins: { legend: { position: 'bottom' } }, scales: { x: { stacked: true }, y: { stacked: true, title: { display: true, text: 'บาท/กล่อง' } } } },
+  },
 };
 const chartsJson = JSON.stringify(charts).replaceAll('<', '\\u003c');
 
@@ -275,6 +286,18 @@ const topIconic = L.SINGLES[0];
       </div>
       <div class="mt-3 rounded-lg bg-red-50 p-3 text-sm text-red-800">⚖️ <b>"ไพ่" = สินค้าควบคุมสรรพสามิตไทย</b> — นำเข้า/ขายต้องมีใบอนุญาต (พ.ร.บ.สรรพสามิต 2560) · เคยมีเคสยึด 33,800 สำรับ ปรับ 7.91 ล้านบาท · 1 กล่อง = 288 ใบ > ลิมิต 120 ใบ</div>
       <p class="mt-2 text-sm"><a href={noteLink('ตารางคำนวณ landed cost')} class="text-[var(--accent)] hover:underline">🧮 เครื่องคำนวณ landed cost กรอกเอง (สูตร 7 ขั้น + ตัวอย่าง UK/US/EU) →</a></p>
+
+      <div class="card mt-5 p-4">
+        <h3 class="mb-1 font-bold">🇬🇧 ซื้อจาก UK — ต้นทางถูกสุดของชุด in-print</h3>
+        <p class="mb-3 text-sm text-slate-400">{L.UK_VERDICT}</p>
+        <div class="grid items-center gap-5 lg:grid-cols-2">
+          <div class="h-64"><canvas id="chart-ukbreak"></canvas></div>
+          <ul class="space-y-2 text-sm text-slate-300">
+            {L.UK_FACTS.map((f) => <li>• {f}</li>)}
+            <li class="text-amber-400">💡 สั่งตรงร้าน UK (zero-rated) ประหยัด ~฿780/กล่อง เทียบผ่านบ้านเพื่อน</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <!-- GRADERS & CHARACTERS -->
