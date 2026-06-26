@@ -31,6 +31,12 @@ const isActive = (p: string) =>
           path.startsWith('/dashboard/lorcana') ? 'bg-[var(--accent)] text-white' : 'text-slate-600 hover:bg-slate-100',
         ]}>🏰 Lorcana</a>
       <a
+        href={url('/popular/')}
+        class:list={[
+          'rounded-lg px-2.5 py-1.5 font-medium transition',
+          path.startsWith('/popular') ? 'bg-[var(--accent)] text-white' : 'text-slate-600 hover:bg-slate-100',
+        ]}>⭐ ตัวละคร</a>
+      <a
         href={url('/notes/')}
         class:list={[
           'rounded-lg px-3 py-1.5 font-medium transition',
