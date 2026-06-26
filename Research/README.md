@@ -65,7 +65,7 @@ Open this folder in Obsidian via **Open folder as vault** if it isn't already lo
 
 ---
 
-## 🏰 โปรเจกต์: Disney Lorcana — ทำกำไร (30 โน้ต, เริ่ม 24 มิ.ย. 2026)
+## 🏰 โปรเจกต์: Disney Lorcana — ทำกำไร (31 โน้ต, เริ่ม 24 มิ.ย. 2026)
 
 > เริ่มที่ [[Disney Lorcana — ทำกำไร (ภาพรวม)]] (hub) หรือ [[แผนปฏิบัติ Lorcana ตามงบประมาณ]] (ลงมือทำ) — ต่อยอดจากโปรเจกต์ OP TCG ตอน "ราคาเริ่มมา"
 > **ข้อสรุป thesis "ราคาเริ่มมา":** จริงบางส่วน — ยอดขายบริษัทตกปี 2025 + อันดับร่วงหลัง One Piece **แต่** ราคา singles ตัว chase ฟื้นจริงปี 2026 (Iconic ใหม่ + Pixar + นักสะสม Disney) ⚠️ Ravensburger เป็นค่าย anti-scarcity → sealed เป็น store of value ที่อ่อนกว่า OP
@@ -96,6 +96,7 @@ Open this folder in Obsidian via **Open folder as vault** if it isn't already lo
 ### 🛒 ซื้อ / ผลิต / เก็บ
 - [[ซื้อ Lorcana ราคาต้นน้ำ — distributor และ ช่องทาง (มิ.ย. 2026)]] — distribution chain, ซื้อใต้ MSRP (US/EU/UK/JP), Saka Saka
 - [[นำเข้า Lorcana มาขายในไทย คุ้มไหม — landed cost (มิ.ย. 2026)]] — ค่าส่ง+อากร+VAT, break-even, ⚖️ ความเสี่ยง "ไพ่" สรรพสามิต
+- [[ตารางคำนวณ landed cost นำเข้า Lorcana (กรอกเอง)]] — 🧮 เครื่องคำนวณกรอกเอง (สูตร+ตัวอย่าง UK/US/EU)
 - [[การผลิต + reprint Lorcana — supply ทำงานยังไง]] — ผลิตที่ Cartamundi US, ปรัชญา reprint, อะไร scarcity แท้
 - [[การ์ดปลอม และ วิธีดูของแท้ Lorcana]] — ของปลอม (Enchanted/sealed reseal) + วิธีดู single/slab
 - [[การเก็บรักษา Lorcana (สภาพอากาศไทย)]] — ความชื้นไทย + กระดาษยุโรปขอบขาวง่าย + ตู้กันชื้น

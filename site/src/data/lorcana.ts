@@ -153,12 +153,13 @@ export const CARDKUB = [
 ];
 
 // 15) Thai landed cost per box (THB) vs local ~4,200–4,900
+// ตัวอย่างคำนวณจริงจากโน้ต "ตารางคำนวณ landed cost" (FX ~42฿/£, 33฿/$ · อากร model 10% · box 1.5 กก.)
 export const LANDED = [
   { scenario: 'TH ร้าน / Saka Saka', baht: 4550, ok: true },
-  { scenario: 'นำเข้า EU bulk (case)', baht: 5250, ok: false },
-  { scenario: 'นำเข้า US ชุดเก่า (case)', baht: 4950, ok: false },
-  { scenario: 'นำเข้า SG', baht: 5450, ok: false },
-  { scenario: 'นำเข้า US ชุดใหม่ (1 กล่อง)', baht: 6170, ok: false },
+  { scenario: 'UK ยกลัง (case 4 กล่อง)', baht: 5030, ok: false },
+  { scenario: 'US สั่งตรง ชุดเก่า', baht: 5782, ok: false },
+  { scenario: 'UK สั่งตรง (zero-rated)', baht: 6042, ok: false },
+  { scenario: 'UK ผ่านบ้านเพื่อน (VAT 20% จม)', baht: 6824, ok: false },
 ];
 export const LANDED_REF = 4550;
 
@@ -328,6 +329,7 @@ export const LEADS = [
 export const sourceNotes = [
   'Disney Lorcana — ทำกำไร (ภาพรวม)',
   'พฤติกรรมแปลก + สัญญาณตลาด TCG',
+  'ตารางคำนวณ landed cost นำเข้า Lorcana',
   'เทียบค่ายตรวจเกรด (PSA-CGC-BGS-SGC-TAG-CCC) ข้อดีข้อเสีย',
   'อันดับความนิยมตัวละคร Disney + นัยต่อ Lorcana',
   'ตลาด Lorcana 2023-2026 — ราคาเริ่มฟื้นจริงไหม',

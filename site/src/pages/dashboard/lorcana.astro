@@ -270,10 +270,11 @@ const topIconic = L.SINGLES[0];
       <div class="grid gap-5 lg:grid-cols-2">
         <div class="card p-4"><h3 class="mb-1 font-bold">ค่าเกรด PSA vs CGC (USD/ใบ)</h3><p class="mb-3 text-xs text-slate-500">{L.GRADING_NOTE} · PSA Value tiers ปิดชั่วคราว (backlog)</p><div class="h-64"><canvas id="chart-grading"></canvas></div></div>
         <div class="card p-4"><h3 class="mb-1 font-bold">ส่งเกรดผ่าน CardKub (บาท/ใบ)</h3><p class="mb-3 text-xs text-slate-500">PSA proxy · Lorcana ไม่อยู่ในลิสต์ → CGC ต้อง ship เองฮ่องกง</p><div class="h-56"><canvas id="chart-cardkub"></canvas></div></div>
-        <div class="card p-4"><h3 class="mb-1 font-bold">นำเข้ามาขายในไทย — ต้นทุน/กล่อง (บาท)</h3><p class="mb-3 text-xs text-slate-500">⚠️ อากร 10–20% ยังไม่ยืนยัน · เกือบทุกทางแพงกว่าซื้อในไทย</p><div class="h-64"><canvas id="chart-landed"></canvas></div></div>
+        <div class="card p-4"><h3 class="mb-1 font-bold">นำเข้ามาขายในไทย — ต้นทุน/กล่อง (บาท)</h3><p class="mb-3 text-xs text-slate-500">⚠️ อากร ~10% ประเมิน · ทุกเส้นทาง 1 กล่อง/ยกลังแพงกว่าซื้อในไทย · ผ่านบ้านเพื่อน UK แย่สุด (VAT 20% จม)</p><div class="h-64"><canvas id="chart-landed"></canvas></div></div>
         <div class="card p-4"><h3 class="mb-1 font-bold">ค่าธรรมเนียมขาย (% all-in)</h3><p class="mb-3 text-xs text-slate-500">FB ไทยฟรี · eBay แพงสุด (~18%) แต่เป็นช่องส่งออกหลัก</p><div class="h-64"><canvas id="chart-fees"></canvas></div></div>
       </div>
-      <div class="mt-3 rounded-lg bg-red-50 p-3 text-sm text-red-800">⚖️ <b>"ไพ่" = สินค้าควบคุมสรรพสามิตไทย</b> — นำเข้า/ขายต้องมีใบอนุญาต (พ.ร.บ.สรรพสามิต 2560) · เคยมีเคสยึด 33,800 สำรับ ปรับ 7.91 ล้านบาท · กระทบทั้งนำเข้า+ส่งออก TCG</div>
+      <div class="mt-3 rounded-lg bg-red-50 p-3 text-sm text-red-800">⚖️ <b>"ไพ่" = สินค้าควบคุมสรรพสามิตไทย</b> — นำเข้า/ขายต้องมีใบอนุญาต (พ.ร.บ.สรรพสามิต 2560) · เคยมีเคสยึด 33,800 สำรับ ปรับ 7.91 ล้านบาท · 1 กล่อง = 288 ใบ > ลิมิต 120 ใบ</div>
+      <p class="mt-2 text-sm"><a href={noteLink('ตารางคำนวณ landed cost')} class="text-[var(--accent)] hover:underline">🧮 เครื่องคำนวณ landed cost กรอกเอง (สูตร 7 ขั้น + ตัวอย่าง UK/US/EU) →</a></p>
     </section>
 
     <!-- GRADERS & CHARACTERS -->
