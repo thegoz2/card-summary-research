@@ -4,13 +4,15 @@
 // store of value; only scarcity-capped chase (Enchanted/Iconic/promo) holds value.
 
 // Fact re-check 2026-06-27: Mickey merch ~$3B/ปี (ไม่ใช่ $9B; $9B = projection ปี 2011), Stitch +54% YoY,
-//   Gundam แซงเฉพาะไตรมาสเปิดตัว Q3 2025, First Chapter box ~$400, Value tier ปิด 2 มิ.ย. 2026.
-//   ค่าเกรดคงตามหน้าทางการในโน้ต · Set 11 Winterspell (ก.พ. 2026) มีในโน้ตแล้ว · ราคา single เป็น snapshot มิ.ย. 2026.
+//   First Chapter box ~$400, Value tier ปิด 2 มิ.ย. 2026, ค่าเกรดคงตามหน้าทางการในโน้ต.
+// Live refresh 2026-06-27: Lorcana ร่วง #6→#8 (TCGplayer Q1 2026), Buzz JR พุ่ง (PSA10 ~$16k),
+//   Moana Curious Explorer +$256/สัปดาห์ จาก catalyst หนัง 10 ก.ค., Pocahontas graded จริง ~$1,900 (เดิม $4,250 สูงไป).
+//   ราคา single เป็น snapshot มิ.ย. 2026 · PriceCharting/Cardmarket ดึงสดบางส่วนไม่ได้ (403).
 export const META = {
   asOf: '2026-06-27',
-  fx: '1 USD = 33 ฿ · 1 EUR = 36 ฿ · 1 GBP = 42 ฿',
-  rankNow: '#5–6',
-  rankNote: 'ร่วงจาก #3 (2023-24) — หลัง MTG/Pokémon/One Piece/Yu-Gi-Oh!',
+  fx: '1 USD = 33.4 ฿ · 1 EUR = 36.9 ฿ · 1 GBP = 44 ฿',
+  rankNow: '#8',
+  rankNote: 'ร่วง #3 (2023-24) → #6 → #8 (Q1 2026) — ใต้ MTG/Pokémon/One Piece/Yu-Gi-Oh/Riftbound/Gundam',
   bearishSignals: 5,
   totalSignals: 8,
   marketState: 'แยกขั้ว (chase/Iconic ขึ้น · sealed/bulk ลง)',
@@ -30,6 +32,7 @@ export const RANK = [
   { t: '2023–24', rank: 3 },
   { t: 'ต้น 2025', rank: 5 },
   { t: 'Q4 2025', rank: 6 },
+  { t: 'Q1 2026', rank: 8 },
 ];
 
 // 3) 8 WARNING SIGNALS (Jun 2026 read)
@@ -37,7 +40,7 @@ export type Signal = 'green' | 'yellow' | 'red';
 export const SIGNALS: { id: number; name: string; status: Signal; detail: string }[] = [
   { id: 1, name: 'TCGplayer "Dropping" report โผล่', status: 'yellow', detail: 'ยังมีแต่ "Climbing" (survivorship bias) — วันที่ Dropping มา = เลี้ยว' },
   { id: 2, name: 'ยอดขายรายปี', status: 'red', detail: 'ตกปี 2025 "normalized at high level" + นักเก็งกำไรถอน' },
-  { id: 3, name: 'อันดับ TCG รายไตรมาส', status: 'red', detail: '#3 → #5 → #6 (ต่ำกว่า One Piece · Gundam แซงเฉพาะไตรมาสเปิดตัว Q3 2025 แล้วร่วงไป #8 เอง)' },
+  { id: 3, name: 'อันดับ TCG รายไตรมาส', status: 'red', detail: '#3 → #5 → #6 → #8 (Q1 2026 · ต่ำกว่า One Piece #3, Riftbound #5, Gundam #7)' },
   { id: 4, name: 'คู่แข่งแย่ง wallet', status: 'red', detail: 'Gundam (ก.ค. 2025) เปิดเหนือ Lorcana · OP/Pokémon โต' },
   { id: 5, name: 'ปริมาณการเกรด (GemRate)', status: 'yellow', detail: '⚪ data gap — spike ใกล้พีค = distribution (ต้องจับเอง)' },
   { id: 6, name: 'reprint / set cadence', status: 'red', detail: '4 ชุด/ปี · เคส Pokémon: ข่าว reprint อย่างเดียว = −21%' },
@@ -99,10 +102,10 @@ export const SET_DISCOUNT = [
 
 // 9) Chase singles — RAW vs GRADED (USD, sold comp ไม่ใช่ ask)
 export const SINGLES = [
-  { card: 'Buzz Jungle Ranger (Iconic)', raw: 3037, graded: 8100, conf: '⚠️ ฟองสบู่' },
+  { card: 'Buzz Jungle Ranger (Iconic)', raw: 3500, graded: 16000, conf: '⚠️ ฟองสบู่ (Wilds Unknown blow-off, +128%/30วัน)' },
   { card: 'Mickey Brave Little Prince (Iconic)', raw: 2084, graded: 8100, conf: '✅ floor ระดับสูง' },
   { card: 'Stitch Rock Star (Ench)', raw: 1250, graded: 1850, conf: '✅ undervalued' },
-  { card: 'Pocahontas Peacekeeper (Iconic)', raw: 948, graded: 4250, conf: '✅' },
+  { card: 'Pocahontas Peacekeeper (Iconic)', raw: 948, graded: 1900, conf: '⚠️ PSA10 ขายจริง ~$1,600–2,075 (เดิม $4,250 สูงไป)' },
   { card: 'Elsa Spirit of Winter (Ench)', raw: 670, graded: 4450, conf: '✅ anchor นิ่งสุด' },
   { card: 'Mickey Steamboat Pilot (Ench)', raw: 261, graded: 1418, conf: '✅' },
 ];
@@ -111,11 +114,11 @@ export const SINGLES = [
 export const WATCH = [
   { card: 'Stitch Rock Star', cur: 1250, buy: 1125, sell: 2500, bucket: 'A 🟢' },
   { card: 'Mickey Steamboat Pilot', cur: 261, buy: 240, sell: 400, bucket: 'A 🟢' },
-  { card: 'Minnie Sweetheart Princess', cur: 1200, buy: 1050, sell: 1600, bucket: 'A 🟢' },
-  { card: 'Hades Looking for a Deal', cur: 728, buy: 600, sell: 950, bucket: 'A 🟢' },
+  { card: 'Minnie Sweetheart Princess', cur: 1100, buy: 1000, sell: 1600, bucket: 'A 🟢' },
+  { card: 'Hades Looking for a Deal', cur: 728, buy: 500, sell: 950, bucket: 'C 🟡 ร่วงจาก $700' },
   { card: 'Elsa Spirit of Winter', cur: 670, buy: 500, sell: 900, bucket: 'B 🔵' },
-  { card: 'Buzz Jungle Ranger', cur: 3037, buy: 1750, sell: 3000, bucket: 'C 🟡 รอย่อ' },
-  { card: 'Moana Curious Explorer', cur: 940, buy: 700, sell: 1000, bucket: 'C 🟡 รอย่อ' },
+  { card: 'Buzz Jungle Ranger', cur: 3500, buy: 1750, sell: 3000, bucket: 'C 🟡 รอย่อ (พุ่งแรง)' },
+  { card: 'Moana Curious Explorer', cur: 1000, buy: 700, sell: 1100, bucket: 'C 🟡 catalyst หนัง 10 ก.ค.' },
   { card: 'Pocahontas Peacekeeper', cur: 948, buy: 575, sell: 950, bucket: 'C 🟡 รอย่อ' },
 ];
 
@@ -212,7 +215,7 @@ export const WHY_LOSE = [
 // 21) Rotation timeline (Core Constructed; Infinity ไม่หมุน)
 export const ROTATION = [
   { round: 'รอบ 1', date: 'ก.ย. 2025 (Fabled)', out: 'Sets 1–4 ออก' },
-  { round: 'รอบ 2', date: 'ก.ค. 2026 (Attack of the Vine)', out: 'Sets 5–8 ออก ⭐' },
+  { round: 'รอบ 2', date: '17 ก.ค. 2026 (Attack of the Vine)', out: 'Sets 5–8 ออก ⭐' },
   { round: 'รอบ 3', date: '~กลาง 2027', out: 'Sets 9–12 ออก' },
 ];
 
@@ -220,9 +223,9 @@ export const ROTATION = [
 export const CATALYSTS = [
   { date: 'พ.ค. 2026', event: 'Wilds Unknown (Pixar เข้า)', type: 'set' },
   { date: '10 ก.ค. 2026', event: 'หนัง Moana live-action', type: 'film' },
-  { date: 'ก.ค. 2026', event: 'Attack of the Vine + rotation', type: 'set' },
+  { date: '17–24 ก.ค. 2026', event: 'Attack of the Vine + rotation (prerelease 17 / วางขาย 24)', type: 'set' },
   { date: '14–16 ส.ค. 2026', event: 'D23 (Lorcana Challenge)', type: 'event' },
-  { date: 'ต.ค. 2026', event: 'Hyperia City (Coco)', type: 'set' },
+  { date: '23 ต.ค. 2026', event: 'Hyperia City (Coco) · prerelease 16 ต.ค.', type: 'set' },
   { date: 'Q1–Q2 2027', event: 'Onward / Lilo & Stitch (teased)', type: 'set' },
 ];
 

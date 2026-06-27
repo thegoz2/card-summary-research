@@ -49,7 +49,7 @@ export const CHARS: PopChar[] = [
   { project: 'lorcana', name: 'Ariel (Little Mermaid)', badge: 'เจ้าหญิง S', metric: 'ขายดี Amazon', momentum: 'live-action', note: 'Iconic ราคาสูง', conf: '✅', pop: 84 },
   { project: 'lorcana', name: 'Minnie Mouse', badge: 'เรือธง', note: 'Iconic ขึ้นเร็ว (~½ ของ Mickey)', conf: '✅', pop: 82 },
   { project: 'lorcana', name: 'Maleficent', badge: 'วายร้าย #1', metric: 'Ranker #1', momentum: 'Halloween ขายหมดเร็ว', note: 'ยังไม่มีการ์ด top-value = upside', conf: '✅', pop: 80 },
-  { project: 'lorcana', name: 'Buzz / Woody (Toy Story)', badge: 'Pixar', metric: 'franchise $16B', momentum: 'Pixar เข้าเกม (Wilds Unknown พ.ค. 2026)', note: 'Buzz Iconic ~$3,000 (⚠️ ฟองสบู่)', conf: '✅', pop: 78 },
+  { project: 'lorcana', name: 'Buzz / Woody (Toy Story)', badge: 'Pixar', metric: 'franchise $16B', momentum: 'Pixar เข้าเกม (Wilds Unknown พ.ค. 2026)', note: 'Buzz Iconic raw ~$3,500 · PSA10 ~$16k (⚠️ ฟองสบู่ พุ่งแรง)', conf: '✅', pop: 78 },
   { project: 'lorcana', name: 'Belle (Beauty & Beast)', badge: 'เจ้าหญิง A', metric: 'fan-poll #1 บ่อย', momentum: '35 ปี (2026)', note: '', conf: '✅', pop: 76 },
   { project: 'lorcana', name: 'Scar', badge: 'วายร้าย #2', metric: 'Google Trends #1', momentum: 'halo Mufasa', note: 'ดีมานด์วายร้ายพิสูจน์แล้ว', conf: '✅', pop: 74 },
   { project: 'lorcana', name: 'Anna (Frozen)', badge: 'เจ้าหญิง', momentum: 'Frozen 3 (2027)', note: 'ราคา ~1/15 ของ Elsa', conf: '⚠️', pop: 73 },

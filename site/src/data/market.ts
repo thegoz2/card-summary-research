@@ -2,11 +2,13 @@
 // (adversarially verified — confidence markers preserved: ✅ verified / ⚠️ partial / ❌ refuted).
 // Update when the underlying notes change, or ask Claude to re-sync.
 // Fact re-check 2026-06-27: PRB EB02-061 floor ~$10–13, OP-16 Admirals = Super Alt-Art (ไม่ใช่ Manga Rare),
-//   OP-17 ชื่อ/วันยังไม่ official, จุ่ม penalty (organizer ม.12 = 3 ด.–3 ปี), Charizard arc, Pokémon mkt size→⚠️,
-//   Value tier ปิด 2 มิ.ย. 2026. ค่าเกรดคงตามหน้าทางการในโน้ต ($17/$20/$149/$299). Market price snapshots ยังเป็น มิ.ย. 2026.
+//   จุ่ม penalty (organizer ม.12 = 3 ด.–3 ปี), Charizard arc, Pokémon mkt size→⚠️, ค่าเกรดคงตามหน้าทางการ ($17/$20/$149/$299).
+// Live refresh 2026-06-27: OP-17 ยืนยันทางการ 26 ส.ค. 2026 (global simultaneous), OP-13 box เด้ง $470→~$715,
+//   EB02-061 SEC(JP P2) ขึ้น, FX อ่อนลง (USD 35→33.4, 100JPY 23→20.7) → ราคา box ต่างประเทศใน THB อาจสูงกว่าจริง ~5–10%.
+//   ราคา SASOM/PriceCharting ดึงสดไม่ได้ (JS/403) → คงค่า snapshot + ⚠️.
 export const META = {
   asOf: '2026-06-27',
-  rates: '1 USD = 35 ฿ · 100 JPY = 23 ฿ · 1 SGD = 26 ฿ · 1 HKD = 4.5 ฿ · 1 MYR = 7.5 ฿',
+  rates: '1 USD = 33.4 ฿ · 100 JPY = 20.7 ฿ · 1 SGD = 25.7 ฿ · 1 HKD = 4.3 ฿ · 1 MYR = 7.9 ฿',
   speculatorShare: 75, // % of market that is speculative (was ~25% 2-3 yrs ago)
   bubbleSignals: { present: 10, total: 14 },
   phaseNow: 'Distribution → จุดตัดสิน',
@@ -20,7 +22,7 @@ export const CYCLE = [
   { phase: 'Expansion', period: '2023–24', active: false },
   { phase: 'Euphoria', period: 'ปลาย 2025', active: false },
   { phase: 'Distribution', period: 'ต้น 2026', active: true },
-  { phase: 'จุดตัดสิน (OP-17)', period: 'ก.ย. 2026', active: false },
+  { phase: 'จุดตัดสิน (OP-17)', period: '26 ส.ค. 2026', active: false },
 ];
 
 // ============================================================
@@ -43,7 +45,7 @@ export const BUBBLE: { id: number; name: string; status: Signal; detail: string 
   { id: 1, name: 'ดัชนี Sealed Box (TCGKing)', status: 'green', detail: '129.4 — ยืนเหนือ 120' },
   { id: 2, name: 'ดัชนี Leader Alt-Art', status: 'green', detail: '130.7 — ยืนเหนือ 120' },
   { id: 3, name: 'Manga Rare ตัวดัง PSA10', status: 'yellow', detail: 'ยังไม่จด eBay sold จริง — สร้างฐานข้อมูล' },
-  { id: 4, name: 'Pattern ราคา sealed ชุดใหม่', status: 'yellow', detail: 'OP-15 chase −30–40% / OP-16 ต้องเฝ้า' },
+  { id: 4, name: 'Pattern ราคา sealed ชุดใหม่', status: 'yellow', detail: 'OP-15 chase −30–40% · OP-16 เปิดแล้ว (chase Akainu ~$130–180) ทรงตัว ยังไม่ blow-off' },
   { id: 5, name: 'ข่าว Bandai reprint / PRB', status: 'yellow', detail: 'PRB-02 (ต.ค. 2025) กด Luffy EB02-061 จาก >$100 → ~$10–13' },
   { id: 6, name: 'สัญญาณ speculator (คดีจุ่ม/ดราม่า)', status: 'yellow', detail: 'ดราม่าจุ่ม/กล่องสุ่ม (เคส 160k ฿ เม.ย. 2026 ⚠️ ยังไม่ยืนยันแหล่ง)' },
   { id: 7, name: 'ข่าว IP One Piece', status: 'green', detail: 'Final Saga ดำเนินต่อ ยังไม่มีวันจบทางการ' },
@@ -107,7 +109,7 @@ export const BOX_PRICES: {
 // เทียบกับ SASOM 4,300 / ร้านรีเทล 7,500
 // ============================================================
 export const CARRY = [
-  { country: '🇯🇵 ญี่ปุ่น (หลัง tax-free)', baht: 3500, conf: '✅', verdict: 'คุ้มสุดถ้า ≤¥18,000' },
+  { country: '🇯🇵 ญี่ปุ่น (หลัง tax-free)', baht: 4500, conf: '⚠️', verdict: 'JP ขึ้น ¥21,300 → ≈ SASOM (คุ้มลดลง)' },
   { country: '🇸🇬 สิงคโปร์ (หลัง GST refund)', baht: 3350, conf: '✅', verdict: 'คุ้ม (ถ้ามีของ)' },
   { country: '🇭🇰 ฮ่องกง (ไม่มีภาษี)', baht: 4275, conf: '✅', verdict: '≈ SASOM' },
   { country: '🇹🇭 SASOM (อ้างอิง)', baht: 4300, conf: '✅', verdict: 'ฐานเทียบ' },
@@ -136,7 +138,7 @@ export const OP17 = {
 // 9) SINGLES — RAW vs GRADED (THB, ราคาชุมชน card2price)
 // ============================================================
 export const SINGLES = [
-  { card: 'Luffy EB02-061 SEC', raw: 77657, graded: 132577 },
+  { card: 'Luffy EB02-061 SEC (JP P2)', raw: 100160, graded: 150851 },
   { card: 'Ace OP13-119 SP', raw: 76798, graded: 294595 },
   { card: 'Luffy OP13-118 SEC', raw: 581061, graded: 1523768 },
 ];
@@ -291,6 +293,7 @@ export const OP13_RUN = [
   { t: 'ม.ค. 26', usd: 519 },
   { t: 'พีค ~ก.พ.', usd: 700 },
   { t: 'พ.ค. 26', usd: 470 },
+  { t: 'มิ.ย. 26', usd: 715 },
 ];
 
 // ============================================================
@@ -326,7 +329,8 @@ export const TIMELINE = [
   { code: 'OP-14', name: "The Azure Sea's Seven", date: 'ม.ค. 2026' },
   { code: 'OP-15', name: "Adventure on Kami's Island", date: 'เม.ย. 2026' },
   { code: 'OP-16', name: 'The Time of Battle', date: 'มิ.ย. 2026' },
-  { code: 'OP-17', name: "The World's Strongest Warriors (ชื่อคาด)", date: 'ส.ค. 2026 (คาด) ⭐' },
+  { code: 'OP-17', name: "The World's Strongest Warriors", date: '26 ส.ค. 2026 ⭐ (global)' },
+  { code: 'OP-18', name: 'ยังไม่ประกาศชื่อ', date: 'พ.ย. 2026 (คาด)' },
 ];
 
 // ============================================================
