@@ -16,6 +16,7 @@ sources:
 > ระดับ: ✅ VERIFIED · ⚠️ PARTIAL · ❌ NOT FOUND
 
 ← กลับ [[Disney Lorcana — ทำกำไร (ภาพรวม)]] | คู่กับ [[ตัวละคร Disney น่าเก็บเก็งกำไร Lorcana — watchlist (มิ.ย. 2026)]] · [[Playbook เก็งกำไร Lorcana — flip-swing-hold + timing]] · [[อภิธานศัพท์ Lorcana (Glossary)]]
+> 🎮 อยาก **เล่นจริง** (เลือกเด็คตามสไตล์ + มือใหม่เล่นอะไรดี) → [[เลือกเด็คเล่น Lorcana — จุดเด่น-ข้อเสีย-สไตล์-เมต้า (มิ.ย. 2026)]]
 
 ---
 

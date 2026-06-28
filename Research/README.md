@@ -1,7 +1,7 @@
 ---
 title: Research Vault
 created: 2026-06-15
-updated: 2026-06-24
+updated: 2026-06-28
 tags: [index]
 ---
 
@@ -14,13 +14,14 @@ Open this folder in Obsidian via **Open folder as vault** if it isn't already lo
 
 ---
 
-## 📚 โปรเจกต์: One Piece TCG — ทำกำไร (32 โน้ต, 18 รอบวิจัย adversarial)
+## 📚 โปรเจกต์: One Piece TCG — ทำกำไร (33 โน้ต, 18 รอบวิจัย adversarial)
 
 > เริ่มที่ [[One Piece TCG - ทำกำไร (ภาพรวม)]] (hub) หรือ [[แผนปฏิบัติ OP TCG ตามงบประมาณ]] (ลงมือทำ)
 
 ### 🏠 ศูนย์กลาง
 - [[One Piece TCG - ทำกำไร (ภาพรวม)]] — hub เชื่อมทุกโน้ต
 - [[อภิธานศัพท์ OP TCG (Glossary)]] — 📖 ศัพท์/แสลงทั้งหมด อธิบายง่ายๆ (อ่านควบคู่โน้ตอื่น)
+- [[เลือกเด็คเล่น One Piece TCG — จุดเด่น-ข้อเสีย-สไตล์-เมต้า (มิ.ย. 2026)]] — 🎮 **เล่นจริง:** เลือก Leader/เด็คตามสไตล์ + เมต้า OP-16 + มือใหม่เล่นอะไรดี
 - [[แผนปฏิบัติ OP TCG ตามงบประมาณ]] — แผนทีละขั้นตามงบ (จุดเริ่มลงมือ)
 - [[ซื้อจากไหนถูกสุด — Decision Guide (มิ.ย. 2026)]] — 🧭 เลือกช่องทางซื้อตามสถานการณ์
 - [[Tracking Sheet — สัญญาณเตือนฟองสบู่ OP TCG (รายเดือน)]] — 📊 กรอกรายเดือน จับจังหวะก่อนฟองสบู่แตก
@@ -65,7 +66,7 @@ Open this folder in Obsidian via **Open folder as vault** if it isn't already lo
 
 ---
 
-## 🏰 โปรเจกต์: Disney Lorcana — ทำกำไร (31 โน้ต, เริ่ม 24 มิ.ย. 2026)
+## 🏰 โปรเจกต์: Disney Lorcana — ทำกำไร (32 โน้ต, เริ่ม 24 มิ.ย. 2026)
 
 > เริ่มที่ [[Disney Lorcana — ทำกำไร (ภาพรวม)]] (hub) หรือ [[แผนปฏิบัติ Lorcana ตามงบประมาณ]] (ลงมือทำ) — ต่อยอดจากโปรเจกต์ OP TCG ตอน "ราคาเริ่มมา"
 > **ข้อสรุป thesis "ราคาเริ่มมา":** จริงบางส่วน — ยอดขายบริษัทตกปี 2025 + อันดับร่วงหลัง One Piece **แต่** ราคา singles ตัว chase ฟื้นจริงปี 2026 (Iconic ใหม่ + Pixar + นักสะสม Disney) ⚠️ Ravensburger เป็นค่าย anti-scarcity → sealed เป็น store of value ที่อ่อนกว่า OP
@@ -80,7 +81,8 @@ Open this folder in Obsidian via **Open folder as vault** if it isn't already lo
 - [[Playbook เก็งกำไร Lorcana — flip-swing-hold + timing]] — 💹 รวมศูนย์ flip/swing/hold + rotation + ทำไมคนเจ๊ง
 - [[ตลาด Lorcana 2023-2026 — ราคาเริ่มฟื้นจริงไหม]] — ไทม์ไลน์ + ยอดขายตก 2025 + สัญญาณฟื้น 2026 + อันดับ TCG โลก
 - [[พยากรณ์ตลาด Lorcana 2026-2028]] — 🔮 3 scenario (Bull/Base/Bear) + ตัวแปรชี้ขาด
-- [[Deck meta Lorcana ปัจจุบัน (มิ.ย. 2026)]] — meta แข่งขัน + การ์ด play-demand + rotation risk
+- [[Deck meta Lorcana ปัจจุบัน (มิ.ย. 2026)]] — meta แข่งขัน + การ์ด play-demand + rotation risk (มุมลงทุน)
+- [[เลือกเด็คเล่น Lorcana — จุดเด่น-ข้อเสีย-สไตล์-เมต้า (มิ.ย. 2026)]] — 🎮 **เล่นจริง:** เลือกคู่สี/archetype ตามสไตล์ + มือใหม่เล่นอะไรดี + ผลกระทบ rotation ก.ค.
 - [[อิทธิพลภายนอก + กลุ่มลูกค้า + ดิจิทัล Lorcana]] — catalyst (หนัง/D23/Pixar) + ใครซื้อ + gap ดิจิทัล
 - [[พฤติกรรมแปลก + สัญญาณตลาด TCG (manipulation-sentiment)]] — buyout/pump-dump/anchoring + influencer/meta/contrarian signals
 - [[Lorcana vs One Piece TCG — ลงทุนตัวไหน]] — เทียบ head-to-head, anti-scarcity, Disney moat, catalyst

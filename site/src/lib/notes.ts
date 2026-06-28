@@ -32,11 +32,12 @@ export interface Category {
 const CATEGORIES: Category[] = [
   { key: 'hub', label: 'ศูนย์กลาง', icon: '🏠', order: 0 },
   { key: 'strategy', label: 'กลยุทธ์ทำกำไร', icon: '📈', order: 1 },
-  { key: 'market', label: 'ตลาด & แนวโน้ม', icon: '🌏', order: 2 },
-  { key: 'cost', label: 'ต้นทุน & ราคา', icon: '💸', order: 3 },
-  { key: 'tools', label: 'เครื่องมือ & ติดตาม', icon: '🛠️', order: 4 },
-  { key: 'reference', label: 'อ้างอิง & คู่มือ', icon: '📚', order: 5 },
-  { key: 'other', label: 'อื่นๆ', icon: '📄', order: 6 },
+  { key: 'gameplay', label: 'เล่นจริง & เด็ค', icon: '🎮', order: 2 },
+  { key: 'market', label: 'ตลาด & แนวโน้ม', icon: '🌏', order: 3 },
+  { key: 'cost', label: 'ต้นทุน & ราคา', icon: '💸', order: 4 },
+  { key: 'tools', label: 'เครื่องมือ & ติดตาม', icon: '🛠️', order: 5 },
+  { key: 'reference', label: 'อ้างอิง & คู่มือ', icon: '📚', order: 6 },
+  { key: 'other', label: 'อื่นๆ', icon: '📄', order: 7 },
 ];
 
 const BY_KEY = Object.fromEntries(CATEGORIES.map((c) => [c.key, c]));
@@ -57,6 +58,8 @@ export function categoryOf(note: Note): Category {
     return BY_KEY.tools;
   if (has('strategy', 'playbook') || inTitle('กลยุทธ์', 'Playbook', 'แผนปฏิบัติ'))
     return BY_KEY.strategy;
+  if (has('gameplay', 'deck') || inTitle('เลือกเด็ค', 'Deck meta'))
+    return BY_KEY.gameplay;
   if (
     has('market', 'market-data', 'global-market', 'cross-country', 'forecast', 'bubble', 'timeline', 'demand') ||
     inTitle('ตลาด', 'ไทม์ไลน์', 'พยากรณ์', 'ฟองสบู่', 'อิทธิพล', 'ทำไม', 'ลูกค้า', 'ลงทุน')
